@@ -54,6 +54,10 @@ function loadQuestionTypes() {
         method: 'GET',
         success: function(data) {
             const select = $('#typeFilter');
+            // Clear existing options except first
+            select.find('option:not(:first)').remove();
+            
+            // Add unique types
             data.forEach(type => {
                 const label = type.replace('_', ' ').toUpperCase();
                 select.append(`<option value="${type}">${label}</option>`);
