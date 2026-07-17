@@ -3,7 +3,6 @@ let currentPage = 1;
 const questionsPerPage = 10;
 let allQuestions = [];
 let showingAnswers = false;
-let userAnswers = {};
 
 // Initialize when page loads
 $(document).ready(function() {
@@ -109,7 +108,6 @@ function applyFilters() {
         success: function(data) {
             allQuestions = data;
             currentPage = 1;
-            userAnswers = {};
             renderQuestions();
             updatePagination();
             updateQuestionCount();
@@ -146,33 +144,38 @@ function renderQuestions() {
     }
     
     const start = (currentPage - 1) * questionsPerPage;
-    const end = start + questionsPerPage;
+    const end = Math.min(start + questionsPerPage, allQuestions.length);
     const pageQuestions = allQuestions.slice(start, end);
     
     let html = '';
-    pageQuestions.forEach((q, index) => {
-        const globalIndex = start + index;
-        const typeLabel = q.type.replace('_', ' ').toUpperCase();
+    
+    pageQuestions.forEach((q, idx) => {
+        const globalIndex = start + idx;
+        const typeLabel = q.type ? q.type.replace('_', ' ').toUpperCase() : 'UNKNOWN';
         const marksLabel = q.marks ? `${q.marks} Mark${q.marks > 1 ? 's' : ''}` : 'N/A';
-        const subjectLabel = q.subject.charAt(0).toUpperCase() + q.subject.slice(1);
+        const subjectLabel = q.subject ? q.subject.charAt(0).toUpperCase() + q.subject.slice(1) : 'Unknown';
         
+        // Build question HTML
+        html += `<div class="question-card" data-index="${globalIndex}">`;
+        
+        // Header with badges
         html += `
-            <div class="question-card position-relative" data-index="${globalIndex}">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                    <div>
-                        <span class="badge bg-danger">${subjectLabel}</span>
-                        <span class="badge bg-primary">${q.chapter}</span>
-                        <span class="badge bg-info">${typeLabel}</span>
-                        <span class="badge bg-success">${marksLabel}</span>
-                        ${q.topic ? `<span class="badge bg-secondary">${q.topic}</span>` : ''}
-                    </div>
-                    <span class="badge bg-warning text-dark">Q${globalIndex + 1}</span>
+            <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
+                <div>
+                    <span class="badge bg-danger">${subjectLabel}</span>
+                    <span class="badge bg-primary">${q.chapter || 'Unknown'}</span>
+                    <span class="badge bg-info">${typeLabel}</span>
+                    <span class="badge bg-success">${marksLabel}</span>
+                    ${q.topic ? `<span class="badge bg-secondary">${q.topic}</span>` : ''}
                 </div>
-                
-                <div class="question-text">${q.question}</div>
+                <span class="badge bg-warning text-dark">Q${globalIndex + 1}</span>
+            </div>
         `;
         
-        // Render different question types
+        // Question text
+        html += `<div class="question-text">${q.question}</div>`;
+        
+        // Render based on question type
         if (q.type === 'mcqs') {
             html += renderMCQ(q, globalIndex);
         } else if (q.type === 'true_false') {
@@ -180,7 +183,6 @@ function renderQuestions() {
         } else if (q.type === 'fill_blanks') {
             html += renderFillBlanks(q, globalIndex);
         } else {
-            // 1, 2, 3 mark questions - show answer button
             html += renderMarkQuestion(q, globalIndex);
         }
         
@@ -189,6 +191,7 @@ function renderQuestions() {
     
     container.html(html);
     
+    // Re-render math if MathJax is available
     if (window.MathJax) {
         MathJax.typesetPromise();
     }
@@ -201,25 +204,24 @@ function renderMCQ(q, index) {
     q.options.forEach((opt, i) => {
         const letter = letters[i];
         html += `
-            <div class="option-item mb-2" data-question="${index}" data-option="${letter}">
-                <button class="btn btn-outline-primary option-btn w-100 text-start" onclick="checkMCQ(${index}, '${letter}')">
+            <div class="option-item mb-2">
+                <button class="btn btn-outline-primary option-btn w-100 text-start" 
+                        onclick="checkMCQ(${index}, '${letter}')"
+                        data-question="${index}" data-option="${letter}">
                     <strong>${letter}.</strong> ${opt}
                 </button>
             </div>
         `;
     });
     
-    // Get the correct answer text for display
-    const correctAnswerText = q.options[letters.indexOf(q.answer)] || q.answer;
-    
     html += `
-        <div id="mcq-feedback-${index}" class="mt-2" style="display: none;"></div>
-        <div id="mcq-answer-${index}" class="answer">
-            <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}. ${correctAnswerText}
+        <div id="feedback-${index}" class="mt-2" style="display: none;"></div>
+        <div id="answer-${index}" class="answer">
+            <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}
         </div>
     `;
     
-    return html;
+    return html + `</div>`;
 }
 
 function renderTrueFalse(q, index) {
@@ -233,8 +235,8 @@ function renderTrueFalse(q, index) {
                     <i class="bi bi-x-circle"></i> False
                 </button>
             </div>
-            <div id="tf-feedback-${index}" class="mt-2" style="display: none;"></div>
-            <div id="tf-answer-${index}" class="answer">
+            <div id="feedback-${index}" class="mt-2" style="display: none;"></div>
+            <div id="answer-${index}" class="answer">
                 <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer ? 'True' : 'False'}
             </div>
         </div>
@@ -246,13 +248,14 @@ function renderFillBlanks(q, index) {
         <div class="fill-blanks-section mt-3">
             <div class="input-group">
                 <input type="text" class="form-control fb-input" id="fb-input-${index}" 
-                       placeholder="Type your answer here..." onkeypress="if(event.key==='Enter') checkFillBlanks(${index})">
+                       placeholder="Type your answer here..." 
+                       onkeypress="if(event.key==='Enter') checkFillBlanks(${index})">
                 <button class="btn btn-primary" onclick="checkFillBlanks(${index})">
                     <i class="bi bi-check"></i> Check
                 </button>
             </div>
-            <div id="fb-feedback-${index}" class="mt-2" style="display: none;"></div>
-            <div id="fb-answer-${index}" class="answer">
+            <div id="feedback-${index}" class="mt-2" style="display: none;"></div>
+            <div id="answer-${index}" class="answer">
                 <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}
             </div>
         </div>
@@ -265,7 +268,7 @@ function renderMarkQuestion(q, index) {
             <button class="btn btn-info" onclick="showMarkAnswer(${index})">
                 <i class="bi bi-eye"></i> Show Answer
             </button>
-            <div id="mark-answer-${index}" class="answer">
+            <div id="answer-${index}" class="answer">
                 <strong><i class="bi bi-check-circle-fill text-success"></i> Answer:</strong> ${q.answer}
             </div>
         </div>
@@ -273,12 +276,12 @@ function renderMarkQuestion(q, index) {
 }
 
 // ============================================
-// MCQ Check Function - FIXED VERSION
+// MCQ Check Function - FIXED
 // ============================================
 function checkMCQ(index, selectedOption) {
     const q = allQuestions[index];
-    const feedbackDiv = $(`#mcq-feedback-${index}`);
-    const answerDiv = $(`#mcq-answer-${index}`);
+    const feedbackDiv = $(`#feedback-${index}`);
+    const answerDiv = $(`#answer-${index}`);
     const buttons = $(`.option-btn[data-question="${index}"]`);
     
     // Remove previous selections
@@ -286,8 +289,6 @@ function checkMCQ(index, selectedOption) {
     
     // CRITICAL FIX: Compare selected letter with answer letter
     const isCorrect = selectedOption === q.answer;
-    
-    console.log('Selected:', selectedOption, 'Answer:', q.answer, 'Correct:', isCorrect); // Debug log
     
     // Highlight selected option
     buttons.each(function() {
@@ -310,6 +311,7 @@ function checkMCQ(index, selectedOption) {
                 <i class="bi bi-check-circle-fill"></i> ✅ Correct! Well done!
             </div>
         `);
+        answerDiv.addClass('show');
     } else {
         // Find the correct option text
         const letters = ['A', 'B', 'C', 'D'];
@@ -333,11 +335,11 @@ function checkMCQ(index, selectedOption) {
 // ============================================
 function checkTrueFalse(index, selectedValue) {
     const q = allQuestions[index];
-    const feedbackDiv = $(`#tf-feedback-${index}`);
-    const answerDiv = $(`#tf-answer-${index}`);
+    const feedbackDiv = $(`#feedback-${index}`);
+    const answerDiv = $(`#answer-${index}`);
     
     // Find the buttons in this question
-    const questionCard = $(`#tf-feedback-${index}`).closest('.question-card');
+    const questionCard = $(`#feedback-${index}`).closest('.question-card');
     const buttons = questionCard.find('.tf-btn');
     
     buttons.removeClass('btn-outline-success btn-outline-danger btn-success btn-danger');
@@ -359,6 +361,7 @@ function checkTrueFalse(index, selectedValue) {
                 <i class="bi bi-check-circle-fill"></i> ✅ Correct! Well done!
             </div>
         `);
+        answerDiv.addClass('show');
     } else {
         feedbackDiv.html(`
             <div class="alert alert-danger">
@@ -378,8 +381,8 @@ function checkFillBlanks(index) {
     const q = allQuestions[index];
     const input = $(`#fb-input-${index}`);
     const userAnswer = input.val().trim();
-    const feedbackDiv = $(`#fb-feedback-${index}`);
-    const answerDiv = $(`#fb-answer-${index}`);
+    const feedbackDiv = $(`#feedback-${index}`);
+    const answerDiv = $(`#answer-${index}`);
     
     if (!userAnswer) {
         feedbackDiv.show();
@@ -402,6 +405,7 @@ function checkFillBlanks(index) {
         `);
         input.addClass('is-valid');
         input.removeClass('is-invalid');
+        answerDiv.addClass('show');
     } else {
         feedbackDiv.html(`
             <div class="alert alert-danger">
@@ -421,7 +425,7 @@ function checkFillBlanks(index) {
 // Mark Question - Show Answer
 // ============================================
 function showMarkAnswer(index) {
-    const answerDiv = $(`#mark-answer-${index}`);
+    const answerDiv = $(`#answer-${index}`);
     answerDiv.toggleClass('show');
 }
 
