@@ -1,0 +1,72 @@
+[
+    {
+      "question": "The modern periodic table has ______ elements.",
+      "answer": "118",
+      "marks": 1,
+      "topic": "Modern Periodic Table",
+      "difficulty": "easy"
+    },
+    {
+      "question": "______ is known as the father of the periodic table.",
+      "answer": "Mendeleev",
+      "marks": 1,
+      "topic": "Periodic Table History",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Noble gases are located in Group ______ of the periodic table.",
+      "answer": "18",
+      "marks": 1,
+      "topic": "Groups and Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "There are ______ periods in the modern periodic table.",
+      "answer": "7",
+      "marks": 1,
+      "topic": "Modern Periodic Table",
+      "difficulty": "easy"
+    },
+    {
+      "question": "The chemical symbol for Sodium is ______.",
+      "answer": "Na",
+      "marks": 1,
+      "topic": "Element Symbols",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Alkali metals are found in Group ______ of the periodic table.",
+      "answer": "1",
+      "marks": 1,
+      "topic": "Groups and Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "The atomic number of Carbon is ______.",
+      "answer": "6",
+      "marks": 1,
+      "topic": "Atomic Numbers",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Halogens are located in Group ______ of the periodic table.",
+      "answer": "17",
+      "marks": 1,
+      "topic": "Groups and Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "The chemical symbol for Iron is ______.",
+      "answer": "Fe",
+      "marks": 1,
+      "topic": "Element Symbols",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Period 6 contains ______ elements.",
+      "answer": "32",
+      "marks": 2,
+      "topic": "Periodic Table Structure",
+      "difficulty": "hard"
+    }
+  ]
