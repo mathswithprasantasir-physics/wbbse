@@ -1,5 +1,6 @@
 {
   [
+  
   {
     "question": "Who is known as the father of the periodic table?",
     "options": ["Dmitri Mendeleev", "John Dalton", "Antoine Lavoisier", "J.J. Thomson"],
@@ -84,7 +85,7 @@
     "question": "How many elements are in Period 6 of the periodic table?",
     "options": ["18", "32", "8", "24"],
     "answer": "B",
-    "marks": 2,
+    "marks": 1,
     "topic": "Periodic Table Structure",
     "difficulty": "hard"
   },
@@ -108,7 +109,7 @@
     "question": "Which element has the highest atomic number in the actinide series?",
     "options": ["Uranium", "Plutonium", "Lawrencium", "Actinium"],
     "answer": "C",
-    "marks": 2,
+    "marks": 1,
     "topic": "Actinide Series",
     "difficulty": "hard"
   },
@@ -156,7 +157,7 @@
     "question": "Which element is located in Period 3, Group 14?",
     "options": ["Carbon", "Silicon", "Germanium", "Tin"],
     "answer": "B",
-    "marks": 2,
+    "marks": 1,
     "topic": "Periodic Table Structure",
     "difficulty": "hard"
   }
