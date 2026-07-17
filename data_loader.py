@@ -8,11 +8,12 @@ class DataLoader:
         self.data_dir = Path('data')
         self.subjects = ['physics', 'chemistry', 'biology']
         self.question_types = ['mcqs', 'true_false', 'fill_blanks', 'one_mark', 'two_mark', 'three_mark']
+        self.all_data = {}  # Initialize empty
         self.load_all_data()
     
     def load_all_data(self):
         """Load all question data from JSON files"""
-        self.all_data = {}
+        self.all_data = {}  # Reset
         
         for subject in self.subjects:
             self.all_data[subject] = {}
@@ -25,27 +26,31 @@ class DataLoader:
                 type_dir = subject_dir / q_type
                 if type_dir.exists():
                     self.all_data[subject][q_type] = {}
+                    
                     for json_file in type_dir.glob('*.json'):
                         chapter_name = json_file.stem.replace('_', ' ').title()
-                        # CRITICAL FIX: Check if file is already loaded
+                        
+                        # Only load if not already loaded
                         if chapter_name not in self.all_data[subject][q_type]:
-                            with open(json_file, 'r', encoding='utf-8') as f:
-                                questions = json.load(f)
-                                # Process LaTeX in questions
-                                for q in questions:
-                                    q['question'] = self.process_latex(q['question'])
-                                    if 'options' in q:
-                                        q['options'] = [self.process_latex(opt) for opt in q['options']]
-                                    if 'answer' in q:
-                                        if isinstance(q['answer'], str):
-                                            q['answer'] = self.process_latex(q['answer'])
-                                self.all_data[subject][q_type][chapter_name] = questions
+                            try:
+                                with open(json_file, 'r', encoding='utf-8') as f:
+                                    questions = json.load(f)
+                                    # Process LaTeX in questions
+                                    for q in questions:
+                                        q['question'] = self.process_latex(q['question'])
+                                        if 'options' in q:
+                                            q['options'] = [self.process_latex(opt) for opt in q['options']]
+                                        if 'answer' in q:
+                                            if isinstance(q['answer'], str):
+                                                q['answer'] = self.process_latex(q['answer'])
+                                    self.all_data[subject][q_type][chapter_name] = questions
+                            except json.JSONDecodeError as e:
+                                print(f"Error loading {json_file}: {e}")
     
     def process_latex(self, text):
         """Process LaTeX expressions in text"""
         if not text:
             return text
-        # Replace \( ... \) with $ ... $ for MathJax
         text = re.sub(r'\\\((.*?)\\\)', r'$\1$', text)
         text = re.sub(r'\\\[(.*?)\\\]', r'$$\1$$', text)
         return text
@@ -126,9 +131,9 @@ class DataLoader:
         return filtered
     
     def get_all_questions(self):
-        """Get all questions"""
+        """Get all questions - remove duplicates"""
         all_q = []
-        seen_questions = set()  # Track unique questions
+        seen_questions = set()
         
         for subject in self.subjects:
             if subject not in self.all_data:
