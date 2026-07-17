@@ -209,10 +209,13 @@ function renderMCQ(q, index) {
         `;
     });
     
+    // Get the correct answer text for display
+    const correctAnswerText = q.options[letters.indexOf(q.answer)] || q.answer;
+    
     html += `
         <div id="mcq-feedback-${index}" class="mt-2" style="display: none;"></div>
         <div id="mcq-answer-${index}" class="answer">
-            <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}
+            <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}. ${correctAnswerText}
         </div>
     `;
     
@@ -269,7 +272,9 @@ function renderMarkQuestion(q, index) {
     `;
 }
 
-// MCQ Check Function
+// ============================================
+// MCQ Check Function - FIXED VERSION
+// ============================================
 function checkMCQ(index, selectedOption) {
     const q = allQuestions[index];
     const feedbackDiv = $(`#mcq-feedback-${index}`);
@@ -279,11 +284,15 @@ function checkMCQ(index, selectedOption) {
     // Remove previous selections
     buttons.removeClass('btn-outline-primary btn-success btn-danger').addClass('btn-outline-primary');
     
+    // CRITICAL FIX: Compare selected letter with answer letter
     const isCorrect = selectedOption === q.answer;
+    
+    console.log('Selected:', selectedOption, 'Answer:', q.answer, 'Correct:', isCorrect); // Debug log
     
     // Highlight selected option
     buttons.each(function() {
-        if ($(this).text().trim().startsWith(selectedOption)) {
+        const btnText = $(this).text().trim();
+        if (btnText.startsWith(selectedOption)) {
             $(this).removeClass('btn-outline-primary');
             if (isCorrect) {
                 $(this).addClass('btn-success');
@@ -302,12 +311,16 @@ function checkMCQ(index, selectedOption) {
             </div>
         `);
     } else {
+        // Find the correct option text
+        const letters = ['A', 'B', 'C', 'D'];
+        const correctIndex = letters.indexOf(q.answer);
+        const correctText = q.options[correctIndex] || q.answer;
+        
         feedbackDiv.html(`
             <div class="alert alert-danger">
-                <i class="bi bi-x-circle-fill"></i> ❌ Incorrect. The correct answer is ${q.answer}
+                <i class="bi bi-x-circle-fill"></i> ❌ Incorrect. The correct answer is ${q.answer}. ${correctText}
             </div>
         `);
-        // Show the correct answer
         answerDiv.addClass('show');
     }
     
@@ -315,26 +328,28 @@ function checkMCQ(index, selectedOption) {
     buttons.prop('disabled', true);
 }
 
+// ============================================
 // True/False Check Function
+// ============================================
 function checkTrueFalse(index, selectedValue) {
     const q = allQuestions[index];
     const feedbackDiv = $(`#tf-feedback-${index}`);
     const answerDiv = $(`#tf-answer-${index}`);
-    const buttons = $(`.tf-btn`).filter(function() {
-        return $(this).closest('.true-false-options').prevAll('.question-text').length === 
-               $(`#tf-feedback-${index}`).closest('.true-false-options').prevAll('.question-text').length;
-    });
+    
+    // Find the buttons in this question
+    const questionCard = $(`#tf-feedback-${index}`).closest('.question-card');
+    const buttons = questionCard.find('.tf-btn');
     
     buttons.removeClass('btn-outline-success btn-outline-danger btn-success btn-danger');
     
     const isCorrect = selectedValue === q.answer;
     
     if (selectedValue) {
-        buttons.eq(0).addClass(isCorrect ? 'btn-success' : 'btn-danger');
-        buttons.eq(1).addClass('btn-outline-danger');
+        buttons.eq(0).removeClass('btn-outline-success').addClass(isCorrect ? 'btn-success' : 'btn-danger');
+        buttons.eq(1).removeClass('btn-outline-danger').addClass('btn-outline-danger');
     } else {
-        buttons.eq(1).addClass(isCorrect ? 'btn-success' : 'btn-danger');
-        buttons.eq(0).addClass('btn-outline-success');
+        buttons.eq(1).removeClass('btn-outline-danger').addClass(isCorrect ? 'btn-success' : 'btn-danger');
+        buttons.eq(0).removeClass('btn-outline-success').addClass('btn-outline-success');
     }
     
     feedbackDiv.show();
@@ -356,7 +371,9 @@ function checkTrueFalse(index, selectedValue) {
     buttons.prop('disabled', true);
 }
 
+// ============================================
 // Fill in the Blanks Check Function
+// ============================================
 function checkFillBlanks(index) {
     const q = allQuestions[index];
     const input = $(`#fb-input-${index}`);
@@ -374,7 +391,6 @@ function checkFillBlanks(index) {
         return;
     }
     
-    // Case insensitive comparison
     const isCorrect = userAnswer.toLowerCase() === q.answer.toLowerCase();
     
     feedbackDiv.show();
@@ -385,6 +401,7 @@ function checkFillBlanks(index) {
             </div>
         `);
         input.addClass('is-valid');
+        input.removeClass('is-invalid');
     } else {
         feedbackDiv.html(`
             <div class="alert alert-danger">
@@ -392,19 +409,25 @@ function checkFillBlanks(index) {
             </div>
         `);
         input.addClass('is-invalid');
+        input.removeClass('is-valid');
         answerDiv.addClass('show');
     }
     
     input.prop('disabled', true);
-    $(`#fb-input-${index}`).next('button').prop('disabled', true);
+    input.next('button').prop('disabled', true);
 }
 
+// ============================================
 // Mark Question - Show Answer
+// ============================================
 function showMarkAnswer(index) {
     const answerDiv = $(`#mark-answer-${index}`);
     answerDiv.toggleClass('show');
 }
 
+// ============================================
+// Toggle All Answers
+// ============================================
 function toggleAnswers() {
     showingAnswers = !showingAnswers;
     $('.answer').toggleClass('show');
@@ -414,6 +437,9 @@ function toggleAnswers() {
     );
 }
 
+// ============================================
+// Pagination
+// ============================================
 function updatePagination() {
     const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
     const pagination = $('#pagination');
@@ -463,6 +489,9 @@ function updateQuestionCount() {
     $('#questionCount').text(`${allQuestions.length} questions`);
 }
 
+// ============================================
+// Export Questions
+// ============================================
 function exportQuestions() {
     const filters = {
         subject: $('#subjectFilter').val(),
@@ -495,6 +524,9 @@ function exportQuestions() {
     });
 }
 
+// ============================================
+// Load Statistics
+// ============================================
 function loadStats() {
     $.ajax({
         url: '/api/stats',
@@ -543,11 +575,3 @@ function loadStats() {
 function showError(message) {
     alert(message);
 }
-
-// Keyboard shortcut for Fill in the Blanks
-$(document).on('keypress', '.fb-input', function(e) {
-    if (e.key === 'Enter') {
-        const index = $(this).attr('id').split('-')[2];
-        checkFillBlanks(parseInt(index));
-    }
-});
