@@ -3,6 +3,7 @@ let currentPage = 1;
 const questionsPerPage = 10;
 let allQuestions = [];
 let showingAnswers = false;
+let userAnswers = {};
 
 // Initialize when page loads
 $(document).ready(function() {
@@ -20,7 +21,6 @@ $(document).ready(function() {
 });
 
 function loadSubjects() {
-    // Subjects are already in HTML, but we need to handle the change event
     $('#subjectFilter').trigger('change');
 }
 
@@ -98,7 +98,6 @@ function applyFilters() {
         topic: $('#topicFilter').val()
     };
     
-    // Remove empty filters
     Object.keys(filters).forEach(key => {
         if (!filters[key]) delete filters[key];
     });
@@ -110,11 +109,11 @@ function applyFilters() {
         success: function(data) {
             allQuestions = data;
             currentPage = 1;
+            userAnswers = {};
             renderQuestions();
             updatePagination();
             updateQuestionCount();
             
-            // Hide answers when new questions load
             showingAnswers = false;
             $('#showAnswersBtn').html('<i class="bi bi-eye"></i> Show Answers');
         },
@@ -152,12 +151,13 @@ function renderQuestions() {
     
     let html = '';
     pageQuestions.forEach((q, index) => {
+        const globalIndex = start + index;
         const typeLabel = q.type.replace('_', ' ').toUpperCase();
         const marksLabel = q.marks ? `${q.marks} Mark${q.marks > 1 ? 's' : ''}` : 'N/A';
         const subjectLabel = q.subject.charAt(0).toUpperCase() + q.subject.slice(1);
         
         html += `
-            <div class="question-card position-relative">
+            <div class="question-card position-relative" data-index="${globalIndex}">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <div>
                         <span class="badge bg-danger">${subjectLabel}</span>
@@ -166,42 +166,252 @@ function renderQuestions() {
                         <span class="badge bg-success">${marksLabel}</span>
                         ${q.topic ? `<span class="badge bg-secondary">${q.topic}</span>` : ''}
                     </div>
-                    <span class="badge bg-warning text-dark">Q${start + index + 1}</span>
+                    <span class="badge bg-warning text-dark">Q${globalIndex + 1}</span>
                 </div>
                 
                 <div class="question-text">${q.question}</div>
         `;
         
-        // Render options for MCQs
-        if (q.type === 'mcqs' && q.options) {
-            html += `<div class="options">`;
-            const letters = ['A', 'B', 'C', 'D'];
-            q.options.forEach((opt, i) => {
-                html += `
-                    <div class="option">
-                        <strong>${letters[i]}.</strong> ${opt}
-                    </div>
-                `;
-            });
-            html += `</div>`;
+        // Render different question types
+        if (q.type === 'mcqs') {
+            html += renderMCQ(q, globalIndex);
+        } else if (q.type === 'true_false') {
+            html += renderTrueFalse(q, globalIndex);
+        } else if (q.type === 'fill_blanks') {
+            html += renderFillBlanks(q, globalIndex);
+        } else {
+            // 1, 2, 3 mark questions - show answer button
+            html += renderMarkQuestion(q, globalIndex);
         }
         
-        // Answer section
-        html += `
-                <div class="answer ${showingAnswers ? 'show' : ''}">
-                    <strong><i class="bi bi-check-circle-fill text-success"></i> Answer:</strong>
-                    ${q.type === 'true_false' ? (q.answer ? 'True' : 'False') : q.answer}
-                </div>
-            </div>
-        `;
+        html += `</div>`;
     });
     
     container.html(html);
     
-    // Re-render math if MathJax is available
     if (window.MathJax) {
         MathJax.typesetPromise();
     }
+}
+
+function renderMCQ(q, index) {
+    const letters = ['A', 'B', 'C', 'D'];
+    let html = `<div class="options mt-3">`;
+    
+    q.options.forEach((opt, i) => {
+        const letter = letters[i];
+        html += `
+            <div class="option-item mb-2" data-question="${index}" data-option="${letter}">
+                <button class="btn btn-outline-primary option-btn w-100 text-start" onclick="checkMCQ(${index}, '${letter}')">
+                    <strong>${letter}.</strong> ${opt}
+                </button>
+            </div>
+        `;
+    });
+    
+    html += `
+        <div id="mcq-feedback-${index}" class="mt-2" style="display: none;"></div>
+        <div id="mcq-answer-${index}" class="answer">
+            <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}
+        </div>
+    `;
+    
+    return html;
+}
+
+function renderTrueFalse(q, index) {
+    return `
+        <div class="true-false-options mt-3">
+            <div class="btn-group w-100" role="group">
+                <button class="btn btn-outline-success tf-btn" onclick="checkTrueFalse(${index}, true)">
+                    <i class="bi bi-check-circle"></i> True
+                </button>
+                <button class="btn btn-outline-danger tf-btn" onclick="checkTrueFalse(${index}, false)">
+                    <i class="bi bi-x-circle"></i> False
+                </button>
+            </div>
+            <div id="tf-feedback-${index}" class="mt-2" style="display: none;"></div>
+            <div id="tf-answer-${index}" class="answer">
+                <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer ? 'True' : 'False'}
+            </div>
+        </div>
+    `;
+}
+
+function renderFillBlanks(q, index) {
+    return `
+        <div class="fill-blanks-section mt-3">
+            <div class="input-group">
+                <input type="text" class="form-control fb-input" id="fb-input-${index}" 
+                       placeholder="Type your answer here..." onkeypress="if(event.key==='Enter') checkFillBlanks(${index})">
+                <button class="btn btn-primary" onclick="checkFillBlanks(${index})">
+                    <i class="bi bi-check"></i> Check
+                </button>
+            </div>
+            <div id="fb-feedback-${index}" class="mt-2" style="display: none;"></div>
+            <div id="fb-answer-${index}" class="answer">
+                <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}
+            </div>
+        </div>
+    `;
+}
+
+function renderMarkQuestion(q, index) {
+    return `
+        <div class="mark-question-section mt-3">
+            <button class="btn btn-info" onclick="showMarkAnswer(${index})">
+                <i class="bi bi-eye"></i> Show Answer
+            </button>
+            <div id="mark-answer-${index}" class="answer">
+                <strong><i class="bi bi-check-circle-fill text-success"></i> Answer:</strong> ${q.answer}
+            </div>
+        </div>
+    `;
+}
+
+// MCQ Check Function
+function checkMCQ(index, selectedOption) {
+    const q = allQuestions[index];
+    const feedbackDiv = $(`#mcq-feedback-${index}`);
+    const answerDiv = $(`#mcq-answer-${index}`);
+    const buttons = $(`.option-btn[data-question="${index}"]`);
+    
+    // Remove previous selections
+    buttons.removeClass('btn-outline-primary btn-success btn-danger').addClass('btn-outline-primary');
+    
+    const isCorrect = selectedOption === q.answer;
+    
+    // Highlight selected option
+    buttons.each(function() {
+        if ($(this).text().trim().startsWith(selectedOption)) {
+            $(this).removeClass('btn-outline-primary');
+            if (isCorrect) {
+                $(this).addClass('btn-success');
+            } else {
+                $(this).addClass('btn-danger');
+            }
+        }
+    });
+    
+    // Show feedback
+    feedbackDiv.show();
+    if (isCorrect) {
+        feedbackDiv.html(`
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle-fill"></i> ✅ Correct! Well done!
+            </div>
+        `);
+    } else {
+        feedbackDiv.html(`
+            <div class="alert alert-danger">
+                <i class="bi bi-x-circle-fill"></i> ❌ Incorrect. The correct answer is ${q.answer}
+            </div>
+        `);
+        // Show the correct answer
+        answerDiv.addClass('show');
+    }
+    
+    // Disable all buttons for this question
+    buttons.prop('disabled', true);
+}
+
+// True/False Check Function
+function checkTrueFalse(index, selectedValue) {
+    const q = allQuestions[index];
+    const feedbackDiv = $(`#tf-feedback-${index}`);
+    const answerDiv = $(`#tf-answer-${index}`);
+    const buttons = $(`.tf-btn`).filter(function() {
+        return $(this).closest('.true-false-options').prevAll('.question-text').length === 
+               $(`#tf-feedback-${index}`).closest('.true-false-options').prevAll('.question-text').length;
+    });
+    
+    buttons.removeClass('btn-outline-success btn-outline-danger btn-success btn-danger');
+    
+    const isCorrect = selectedValue === q.answer;
+    
+    if (selectedValue) {
+        buttons.eq(0).addClass(isCorrect ? 'btn-success' : 'btn-danger');
+        buttons.eq(1).addClass('btn-outline-danger');
+    } else {
+        buttons.eq(1).addClass(isCorrect ? 'btn-success' : 'btn-danger');
+        buttons.eq(0).addClass('btn-outline-success');
+    }
+    
+    feedbackDiv.show();
+    if (isCorrect) {
+        feedbackDiv.html(`
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle-fill"></i> ✅ Correct! Well done!
+            </div>
+        `);
+    } else {
+        feedbackDiv.html(`
+            <div class="alert alert-danger">
+                <i class="bi bi-x-circle-fill"></i> ❌ Incorrect. The correct answer is ${q.answer ? 'True' : 'False'}
+            </div>
+        `);
+        answerDiv.addClass('show');
+    }
+    
+    buttons.prop('disabled', true);
+}
+
+// Fill in the Blanks Check Function
+function checkFillBlanks(index) {
+    const q = allQuestions[index];
+    const input = $(`#fb-input-${index}`);
+    const userAnswer = input.val().trim();
+    const feedbackDiv = $(`#fb-feedback-${index}`);
+    const answerDiv = $(`#fb-answer-${index}`);
+    
+    if (!userAnswer) {
+        feedbackDiv.show();
+        feedbackDiv.html(`
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle-fill"></i> Please type an answer first!
+            </div>
+        `);
+        return;
+    }
+    
+    // Case insensitive comparison
+    const isCorrect = userAnswer.toLowerCase() === q.answer.toLowerCase();
+    
+    feedbackDiv.show();
+    if (isCorrect) {
+        feedbackDiv.html(`
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle-fill"></i> ✅ Correct! Well done!
+            </div>
+        `);
+        input.addClass('is-valid');
+    } else {
+        feedbackDiv.html(`
+            <div class="alert alert-danger">
+                <i class="bi bi-x-circle-fill"></i> ❌ Incorrect. The correct answer is "${q.answer}"
+            </div>
+        `);
+        input.addClass('is-invalid');
+        answerDiv.addClass('show');
+    }
+    
+    input.prop('disabled', true);
+    $(`#fb-input-${index}`).next('button').prop('disabled', true);
+}
+
+// Mark Question - Show Answer
+function showMarkAnswer(index) {
+    const answerDiv = $(`#mark-answer-${index}`);
+    answerDiv.toggleClass('show');
+}
+
+function toggleAnswers() {
+    showingAnswers = !showingAnswers;
+    $('.answer').toggleClass('show');
+    $('#showAnswersBtn').html(showingAnswers ? 
+        '<i class="bi bi-eye-slash"></i> Hide Answers' : 
+        '<i class="bi bi-eye"></i> Show Answers'
+    );
 }
 
 function updatePagination() {
@@ -215,14 +425,12 @@ function updatePagination() {
     
     let html = '';
     
-    // Previous button
     html += `
         <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
             <a class="page-link" href="#" data-page="${currentPage - 1}">&laquo;</a>
         </li>
     `;
     
-    // Page numbers
     for (let i = 1; i <= totalPages; i++) {
         html += `
             <li class="page-item ${i === currentPage ? 'active' : ''}">
@@ -231,7 +439,6 @@ function updatePagination() {
         `;
     }
     
-    // Next button
     html += `
         <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
             <a class="page-link" href="#" data-page="${currentPage + 1}">&raquo;</a>
@@ -240,7 +447,6 @@ function updatePagination() {
     
     pagination.html(html);
     
-    // Click handlers
     pagination.find('.page-link').click(function(e) {
         e.preventDefault();
         const page = parseInt($(this).data('page'));
@@ -248,7 +454,6 @@ function updatePagination() {
             currentPage = page;
             renderQuestions();
             updatePagination();
-            // Scroll to top of questions
             $('#questionsContainer')[0].scrollIntoView({ behavior: 'smooth' });
         }
     });
@@ -258,15 +463,6 @@ function updateQuestionCount() {
     $('#questionCount').text(`${allQuestions.length} questions`);
 }
 
-function toggleAnswers() {
-    showingAnswers = !showingAnswers;
-    $('.answer').toggleClass('show');
-    $('#showAnswersBtn').html(showingAnswers ? 
-        '<i class="bi bi-eye-slash"></i> Hide Answers' : 
-        '<i class="bi bi-eye"></i> Show Answers'
-    );
-}
-
 function exportQuestions() {
     const filters = {
         subject: $('#subjectFilter').val(),
@@ -274,7 +470,6 @@ function exportQuestions() {
         type: $('#typeFilter').val()
     };
     
-    // Remove empty filters
     Object.keys(filters).forEach(key => {
         if (!filters[key]) delete filters[key];
     });
@@ -313,7 +508,6 @@ function loadStats() {
                 </div>
             `;
             
-            // Add by subject
             if (data.by_subject) {
                 Object.keys(data.by_subject).forEach(subject => {
                     const label = subject.charAt(0).toUpperCase() + subject.slice(1);
@@ -326,7 +520,6 @@ function loadStats() {
                 });
             }
             
-            // Add by type
             if (data.by_type) {
                 Object.keys(data.by_type).forEach(type => {
                     const label = type.replace('_', ' ').toUpperCase();
@@ -348,6 +541,13 @@ function loadStats() {
 }
 
 function showError(message) {
-    // You can implement a better error notification
     alert(message);
 }
+
+// Keyboard shortcut for Fill in the Blanks
+$(document).on('keypress', '.fb-input', function(e) {
+    if (e.key === 'Enter') {
+        const index = $(this).attr('id').split('-')[2];
+        checkFillBlanks(parseInt(index));
+    }
+});
