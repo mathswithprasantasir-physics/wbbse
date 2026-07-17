@@ -27,17 +27,19 @@ class DataLoader:
                     self.all_data[subject][q_type] = {}
                     for json_file in type_dir.glob('*.json'):
                         chapter_name = json_file.stem.replace('_', ' ').title()
-                        with open(json_file, 'r', encoding='utf-8') as f:
-                            questions = json.load(f)
-                            # Process LaTeX in questions
-                            for q in questions:
-                                q['question'] = self.process_latex(q['question'])
-                                if 'options' in q:
-                                    q['options'] = [self.process_latex(opt) for opt in q['options']]
-                                if 'answer' in q:
-                                    if isinstance(q['answer'], str):
-                                        q['answer'] = self.process_latex(q['answer'])
-                            self.all_data[subject][q_type][chapter_name] = questions
+                        # CRITICAL FIX: Check if file is already loaded
+                        if chapter_name not in self.all_data[subject][q_type]:
+                            with open(json_file, 'r', encoding='utf-8') as f:
+                                questions = json.load(f)
+                                # Process LaTeX in questions
+                                for q in questions:
+                                    q['question'] = self.process_latex(q['question'])
+                                    if 'options' in q:
+                                        q['options'] = [self.process_latex(opt) for opt in q['options']]
+                                    if 'answer' in q:
+                                        if isinstance(q['answer'], str):
+                                            q['answer'] = self.process_latex(q['answer'])
+                                self.all_data[subject][q_type][chapter_name] = questions
     
     def process_latex(self, text):
         """Process LaTeX expressions in text"""
@@ -126,6 +128,8 @@ class DataLoader:
     def get_all_questions(self):
         """Get all questions"""
         all_q = []
+        seen_questions = set()  # Track unique questions
+        
         for subject in self.subjects:
             if subject not in self.all_data:
                 continue
@@ -134,11 +138,16 @@ class DataLoader:
                     continue
                 for chap, questions in self.all_data[subject][q_type].items():
                     for q in questions:
-                        q_copy = q.copy()
-                        q_copy['type'] = q_type
-                        q_copy['subject'] = subject
-                        q_copy['chapter'] = chap
-                        all_q.append(q_copy)
+                        # Create a unique key for each question
+                        q_key = f"{q['question']}_{q_type}_{chap}"
+                        if q_key not in seen_questions:
+                            seen_questions.add(q_key)
+                            q_copy = q.copy()
+                            q_copy['type'] = q_type
+                            q_copy['subject'] = subject
+                            q_copy['chapter'] = chap
+                            all_q.append(q_copy)
+        
         return all_q
     
     def get_stats(self):
