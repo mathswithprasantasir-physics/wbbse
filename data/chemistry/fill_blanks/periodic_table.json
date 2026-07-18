@@ -68,5 +68,47 @@
       "marks": 2,
       "topic": "Periodic Table Structure",
       "difficulty": "hard"
+    },
+    {
+      "question": "The lightest metal is ______.",
+      "answer": "Lithium (Li)",
+      "marks": 1,
+      "topic": "Metals",
+      "difficulty": "easy"
+    },
+    {
+      "question": "The first two elements of Period 1 are ______ and ______.",
+      "answer": "Hydrogen (H), Helium (He)",
+      "marks": 1,
+      "topic": "Periods and Elements",
+      "difficulty": "easy"
+    },
+    {
+      "question": "The name of the heaviest naturally occurring element is ______.",
+      "answer": "Uranium",
+      "marks": 1,
+      "topic": "Radioactive Elements",
+      "difficulty": "medium"
+    },
+    {
+      "question": "According to the modern periodic table, metalloids are present in Group ______.",
+      "answer": "No single group",
+      "marks": 1,
+      "topic": "Classification of Elements",
+      "difficulty": "hard"
+    },
+    {
+      "question": "The ______ period of the modern periodic table is an incomplete period.",
+      "answer": "Seventh",
+      "marks": 1,
+      "topic": "Periodic Table Structure",
+      "difficulty": "medium"
+    },
+    {
+      "question": "From Moseley's experiment, it was concluded that ______ is the basis of the modern periodic law.",
+      "answer": "Atomic number",
+      "marks": 1,
+      "topic": "Modern Periodic Law",
+      "difficulty": "medium"
     }
   ]
