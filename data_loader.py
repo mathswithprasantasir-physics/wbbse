@@ -7,7 +7,7 @@ class DataLoader:
     def __init__(self):
         self.data_dir = Path('data')
         self.subjects = ['physics', 'chemistry', 'biology']
-        self.question_types = ['mcqs', 'true_false', 'fill_blanks', 'match_column', 'one_mark', 'two_mark', 'three_mark']
+        self.question_types = ['mcqs', 'true_false', 'fill_blanks', 'match_column', 'vsaq', 'saq', 'laq']
         self.all_data = {}
         self.load_all_data()
     
