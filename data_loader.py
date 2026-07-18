@@ -7,13 +7,13 @@ class DataLoader:
     def __init__(self):
         self.data_dir = Path('data')
         self.subjects = ['physics', 'chemistry', 'biology']
-        self.question_types = ['mcqs', 'true_false', 'fill_blanks', 'one_mark', 'two_mark', 'three_mark']
-        self.all_data = {}  # Initialize empty
+        self.question_types = ['mcqs', 'true_false', 'fill_blanks', 'match_column', 'one_mark', 'two_mark', 'three_mark']
+        self.all_data = {}
         self.load_all_data()
     
     def load_all_data(self):
         """Load all question data from JSON files"""
-        self.all_data = {}  # Reset
+        self.all_data = {}
         
         for subject in self.subjects:
             self.all_data[subject] = {}
@@ -30,12 +30,10 @@ class DataLoader:
                     for json_file in type_dir.glob('*.json'):
                         chapter_name = json_file.stem.replace('_', ' ').title()
                         
-                        # Only load if not already loaded
                         if chapter_name not in self.all_data[subject][q_type]:
                             try:
                                 with open(json_file, 'r', encoding='utf-8') as f:
                                     questions = json.load(f)
-                                    # Process LaTeX in questions
                                     for q in questions:
                                         q['question'] = self.process_latex(q['question'])
                                         if 'options' in q:
@@ -43,12 +41,18 @@ class DataLoader:
                                         if 'answer' in q:
                                             if isinstance(q['answer'], str):
                                                 q['answer'] = self.process_latex(q['answer'])
+                                        # For match_column
+                                        if 'left_column' in q:
+                                            q['left_column'] = [self.process_latex(item) for item in q['left_column']]
+                                        if 'right_column' in q:
+                                            q['right_column'] = [self.process_latex(item) for item in q['right_column']]
+                                        if 'correct_matches' in q:
+                                            q['correct_matches'] = {self.process_latex(k): self.process_latex(v) for k, v in q['correct_matches'].items()}
                                     self.all_data[subject][q_type][chapter_name] = questions
                             except json.JSONDecodeError as e:
                                 print(f"Error loading {json_file}: {e}")
     
     def process_latex(self, text):
-        """Process LaTeX expressions in text"""
         if not text:
             return text
         text = re.sub(r'\\\((.*?)\\\)', r'$\1$', text)
@@ -56,11 +60,9 @@ class DataLoader:
         return text
     
     def get_subjects(self):
-        """Get all subjects"""
         return self.subjects
     
     def get_chapters(self, subject=None):
-        """Get all unique chapters for a subject"""
         if subject and subject in self.all_data:
             chapters = set()
             for q_type in self.all_data[subject].values():
@@ -70,10 +72,14 @@ class DataLoader:
     
     def get_question_types(self):
         """Get all question types"""
-        return self.question_types
+        unique_types = set()
+        for subject in self.all_data:
+            for q_type in self.all_data[subject].keys():
+                if self.all_data[subject][q_type]:
+                    unique_types.add(q_type)
+        return sorted(list(unique_types))
     
     def get_topics(self, subject=None, chapter=None):
-        """Get topics for a specific subject and chapter"""
         topics = set()
         if subject and subject in self.all_data and chapter:
             for q_type in self.all_data[subject].values():
@@ -84,21 +90,17 @@ class DataLoader:
         return sorted(list(topics))
     
     def get_filtered_questions(self, subject=None, chapter=None, question_type=None, marks=None, topic=None):
-        """Get questions based on filters"""
         filtered = []
         
-        # If no filters, return all questions
         if not any([subject, chapter, question_type, marks, topic]):
             return self.get_all_questions()
         
-        # Filter by subject
         subjects_to_check = [subject] if subject else self.subjects
         
         for subj in subjects_to_check:
             if subj not in self.all_data:
                 continue
             
-            # Filter by question type
             types_to_check = [question_type] if question_type else self.question_types
             
             for q_type in types_to_check:
@@ -107,21 +109,17 @@ class DataLoader:
                 
                 chapters = self.all_data[subj][q_type]
                 
-                # Filter by chapter
                 if chapter:
                     chapters = {chapter: chapters.get(chapter, [])}
                 
                 for chap, questions in chapters.items():
                     for q in questions:
-                        # Filter by marks
                         if marks and str(q.get('marks', '')) != str(marks):
                             continue
                         
-                        # Filter by topic
                         if topic and q.get('topic', '') != topic:
                             continue
                         
-                        # Add question with metadata
                         q_copy = q.copy()
                         q_copy['type'] = q_type
                         q_copy['subject'] = subj
@@ -131,7 +129,6 @@ class DataLoader:
         return filtered
     
     def get_all_questions(self):
-        """Get all questions - remove duplicates"""
         all_q = []
         seen_questions = set()
         
@@ -143,7 +140,6 @@ class DataLoader:
                     continue
                 for chap, questions in self.all_data[subject][q_type].items():
                     for q in questions:
-                        # Create a unique key for each question
                         q_key = f"{q['question']}_{q_type}_{chap}"
                         if q_key not in seen_questions:
                             seen_questions.add(q_key)
@@ -156,7 +152,6 @@ class DataLoader:
         return all_q
     
     def get_stats(self):
-        """Get statistics"""
         stats = {
             'total_questions': 0,
             'by_subject': {},
