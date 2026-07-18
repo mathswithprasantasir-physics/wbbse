@@ -1,0 +1,534 @@
+[
+    {
+      "question": "Which group of the modern periodic table contains the halogens?",
+      "answer": "Group 17",
+      "marks": 1,
+      "topic": "Groups and Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Which element has the largest atomic radius?",
+      "answer": "Francium (Fr)",
+      "marks": 1,
+      "topic": "Periodic Trends",
+      "difficulty": "easy"
+    },
+    {
+      "question": "How many periods are present in the modern periodic table?",
+      "answer": "7",
+      "marks": 1,
+      "topic": "Periodic Table Structure",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Name the noble gas present in the first period of the periodic table.",
+      "answer": "Helium (He)",
+      "marks": 1,
+      "topic": "Noble Gases",
+      "difficulty": "easy"
+    },
+    {
+      "question": "How many elements are present in the fifth period of the periodic table?",
+      "answer": "18",
+      "marks": 1,
+      "topic": "Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Which element has the highest atomic radius among the alkali metals?",
+      "answer": "Rubidium (Rb)",
+      "marks": 1,
+      "topic": "Periodic Trends",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Which is the lightest metal?",
+      "answer": "Lithium (Li)",
+      "marks": 1,
+      "topic": "Metals",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Name one synthetic element.",
+      "answer": "Nihonium (Nh)",
+      "marks": 1,
+      "topic": "Synthetic Elements",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Which element has the highest electronegativity?",
+      "answer": "Fluorine (F)",
+      "marks": 1,
+      "topic": "Periodic Trends",
+      "difficulty": "easy"
+    },
+    {
+      "question": "How many groups are there in the modern periodic table?",
+      "answer": "18",
+      "marks": 1,
+      "topic": "Groups and Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Name the noble gas discovered after Neon in the periodic table.",
+      "answer": "Argon (Ar)",
+      "marks": 1,
+      "topic": "Noble Gases",
+      "difficulty": "medium"
+    },
+    {
+      "question": "How many elements are present in the second period of the periodic table?",
+      "answer": "8",
+      "marks": 1,
+      "topic": "Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "What is the modern name of Eka-aluminium?",
+      "answer": "Gallium (Ga)",
+      "marks": 1,
+      "topic": "History of Periodic Table",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Which element is placed in Group 1 of the modern periodic table?",
+      "answer": "Hydrogen (H)",
+      "marks": 1,
+      "topic": "Groups and Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Name the noble gases that occur naturally.",
+      "answer": "He, Ne, Ar, Kr, Xe",
+      "marks": 1,
+      "topic": "Noble Gases",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Name the radioactive noble gas.",
+      "answer": "Radon (Rn)",
+      "marks": 1,
+      "topic": "Noble Gases",
+      "difficulty": "medium"
+    },
+    {
+      "question": "How many elements are present in the first period of the periodic table?",
+      "answer": "2",
+      "marks": 1,
+      "topic": "Periods",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Name a radioactive element.",
+      "answer": "Plutonium (Pu)",
+      "marks": 1,
+      "topic": "Radioactive Elements",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Which is the longest period in the periodic table?",
+      "answer": "Sixth period",
+      "marks": 1,
+      "topic": "Periods",
+      "difficulty": "medium"
+    },
+    {
+      "question": "State the modern periodic law.",
+      "answer": "The physical and chemical properties of elements are periodic functions of their atomic numbers.",
+      "marks": 1,
+      "topic": "Modern Periodic Law",
+      "difficulty": "medium"
+    },
+    {
+        "question": "Name the Group 2 elements present in the fourth period.",
+        "answer": "Calcium (Ca)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element has the highest ionization energy?",
+        "answer": "Helium (He)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Which element has the lowest ionization energy among the alkali metals?",
+        "answer": "Cesium (Cs)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "How many elements are present in the fourth period of the periodic table?",
+        "answer": "18",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the Group 15 elements.",
+        "answer": "N, P, As, Sb, Bi",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Name the coinage metals.",
+        "answer": "Cu, Ag, Au",
+        "marks": 1,
+        "topic": "Metals",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element has the highest atomic radius among the alkali metals?",
+        "answer": "Francium (Fr)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Name the most electropositive element.",
+        "answer": "Cesium (Cs)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Which element belongs to Group 12?",
+        "answer": "Zinc (Zn)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the halogen present in the second period.",
+        "answer": "Fluorine (F)",
+        "marks": 1,
+        "topic": "Halogens",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Arrange the alkali metals in increasing order of atomic radius: Na, Li, K, Cs.",
+        "answer": "Li < Na < K < Cs",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "How many gaseous elements are present in the modern periodic table?",
+        "answer": "11",
+        "marks": 1,
+        "topic": "Classification of Elements",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Name the Group 2 elements.",
+        "answer": "Be, Mg, Ca, Sr, Ba",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element is known as the most reactive halogen?",
+        "answer": "Fluorine (F)",
+        "marks": 1,
+        "topic": "Halogens",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the element placed in Period 3 and Group 13.",
+        "answer": "Aluminium (Al)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "How many elements are present in the third period?",
+        "answer": "8",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element is called the heaviest alkali metal?",
+        "answer": "Francium (Fr)",
+        "marks": 1,
+        "topic": "Alkali Metals",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Name the noble gases present in the first two periods.",
+        "answer": "Helium (He) and Neon (Ne)",
+        "marks": 1,
+        "topic": "Noble Gases",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Arrange the halogens in decreasing order of electronegativity: F, Cl, Br, I.",
+        "answer": "F > Cl > Br > I",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Which group of the periodic table contains the alkali metals?",
+        "answer": "Group 1",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which group of the periodic table contains the coinage metals?",
+        "answer": "Group 11",
+        "marks": 1,
+        "topic": "Transition Elements",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Which element has the smallest atomic radius among the alkali metals?",
+        "answer": "Lithium (Li)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the element present in Period 2 and Group 17.",
+        "answer": "Fluorine (F)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Arrange the alkali metals in increasing order of ionization energy: Li, Na, K, Cs.",
+        "answer": "Cs < K < Na < Li",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Name the radioactive noble gas.",
+        "answer": "Radon (Rn)",
+        "marks": 1,
+        "topic": "Noble Gases",
+        "difficulty": "easy"
+      },
+      {
+        "question": "How many groups are there in the long form of the modern periodic table?",
+        "answer": "18",
+        "marks": 1,
+        "topic": "Modern Periodic Table",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the halogen present in the fourth period.",
+        "answer": "Bromine (Br)",
+        "marks": 1,
+        "topic": "Halogens",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element belongs to Group 16 and Period 3?",
+        "answer": "Sulfur (S)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the first synthetic element.",
+        "answer": "Technetium (Tc)",
+        "marks": 1,
+        "topic": "Synthetic Elements",
+        "difficulty": "medium"
+      },
+      {
+        "question": "How many elements are present in the sixth period of the periodic table?",
+        "answer": "32",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Which period is known as the shortest period?",
+        "answer": "First period",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the Group 1 elements.",
+        "answer": "Li, Na, K, Rb, Cs",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element has the highest electron affinity among the halogens?",
+        "answer": "Chlorine (Cl)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which group contains all the noble gases in the modern periodic table?",
+        "answer": "Group 18",
+        "marks": 1,
+        "topic": "Noble Gases",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the element placed in Period 4 and Group 2.",
+        "answer": "Calcium (Ca)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element has the highest metallic character?",
+        "answer": "Francium (Fr)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "What is the basis of the Modern Periodic Law?",
+        "answer": "Atomic number",
+        "marks": 1,
+        "topic": "Modern Periodic Law",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the element placed in Period 2 and Group 18.",
+        "answer": "Neon (Ne)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which period is an incomplete period in the modern periodic table?",
+        "answer": "Seventh period",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Name the element placed in Period 3 and Group 16.",
+        "answer": "Sulfur (S)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which period contains the maximum number of elements?",
+        "answer": "Sixth period",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Name the element with atomic number 19.",
+        "answer": "Potassium (K)",
+        "marks": 1,
+        "topic": "Atomic Number",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element has the smallest atomic radius in Group 2?",
+        "answer": "Beryllium (Be)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "How many elements are present in Group 17 (excluding the artificially prepared element Tennessine)?",
+        "answer": "5",
+        "marks": 1,
+        "topic": "Halogens",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Name the elements of Period 1.",
+        "answer": "Hydrogen (H), Helium (He)",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which group is known as the halogen family?",
+        "answer": "Group 17",
+        "marks": 1,
+        "topic": "Halogens",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the element placed in Period 4 and Group 17.",
+        "answer": "Bromine (Br)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element is the lightest noble gas?",
+        "answer": "Helium (He)",
+        "marks": 1,
+        "topic": "Noble Gases",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element has the maximum electron affinity among the halogens?",
+        "answer": "Chlorine (Cl)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Which group of the modern periodic table contains the alkaline earth metals?",
+        "answer": "Group 2",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Name the element placed in Period 3 and Group 1.",
+        "answer": "Sodium (Na)",
+        "marks": 1,
+        "topic": "Groups and Periods",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Which element is the most electropositive among all naturally occurring elements?",
+        "answer": "Cesium (Cs)",
+        "marks": 1,
+        "topic": "Periodic Trends",
+        "difficulty": "hard"
+      },
+      {
+        "question": "How many elements are present in the seventh period?",
+        "answer": "32",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Name the noble gas present in Period 5.",
+        "answer": "Xenon (Xe)",
+        "marks": 1,
+        "topic": "Noble Gases",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Which element belongs to Group 11 and is commonly known as a coinage metal?",
+        "answer": "Copper (Cu)",
+        "marks": 1,
+        "topic": "Transition Elements",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Which period contains exactly 18 elements?",
+        "answer": "Fourth and Fifth periods",
+        "marks": 1,
+        "topic": "Periods",
+        "difficulty": "medium"
+      }
+  ]
