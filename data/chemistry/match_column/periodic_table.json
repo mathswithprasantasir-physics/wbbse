@@ -1,0 +1,249 @@
+[
+    {
+      "question": "Match the elements with their chemical symbols:",
+      "left_column": ["Sodium", "Potassium", "Iron", "Mercury", "Silver", "Gold", "Lead", "Copper"],
+      "right_column": ["Na", "K", "Fe", "Hg", "Ag", "Au", "Pb", "Cu"],
+      "correct_matches": {
+        "Sodium": "Na",
+        "Potassium": "K",
+        "Iron": "Fe",
+        "Mercury": "Hg",
+        "Silver": "Ag",
+        "Gold": "Au",
+        "Lead": "Pb",
+        "Copper": "Cu"
+      },
+      "marks": 8,
+      "topic": "Element Symbols",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Match the groups with their names:",
+      "left_column": ["Group 1", "Group 2", "Group 17", "Group 18", "Group 16", "Group 15"],
+      "right_column": ["Alkali metals", "Alkaline earth metals", "Halogens", "Noble gases", "Chalcogens", "Pnictogens"],
+      "correct_matches": {
+        "Group 1": "Alkali metals",
+        "Group 2": "Alkaline earth metals",
+        "Group 17": "Halogens",
+        "Group 18": "Noble gases",
+        "Group 16": "Chalcogens",
+        "Group 15": "Pnictogens"
+      },
+      "marks": 6,
+      "topic": "Groups and Periods",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Match the elements with their atomic numbers:",
+      "left_column": ["Carbon", "Oxygen", "Nitrogen", "Helium", "Hydrogen", "Sodium", "Chlorine", "Calcium"],
+      "right_column": ["6", "8", "7", "2", "1", "11", "17", "20"],
+      "correct_matches": {
+        "Carbon": "6",
+        "Oxygen": "8",
+        "Nitrogen": "7",
+        "Helium": "2",
+        "Hydrogen": "1",
+        "Sodium": "11",
+        "Chlorine": "17",
+        "Calcium": "20"
+      },
+      "marks": 8,
+      "topic": "Atomic Numbers",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Match the periods with their number of elements:",
+      "left_column": ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6"],
+      "right_column": ["2", "8", "8", "18", "18", "32"],
+      "correct_matches": {
+        "Period 1": "2",
+        "Period 2": "8",
+        "Period 3": "8",
+        "Period 4": "18",
+        "Period 5": "18",
+        "Period 6": "32"
+      },
+      "marks": 6,
+      "topic": "Periodic Table Structure",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Match the scientists with their contributions:",
+      "left_column": ["Mendeleev", "Dalton", "Lavoisier", "Thomson", "Rutherford", "Bohr"],
+      "right_column": [
+        "Modern periodic table",
+        "Atomic theory",
+        "Law of conservation of mass",
+        "Discovery of electron",
+        "Discovery of nucleus",
+        "Planetary model of atom"
+      ],
+      "correct_matches": {
+        "Mendeleev": "Modern periodic table",
+        "Dalton": "Atomic theory",
+        "Lavoisier": "Law of conservation of mass",
+        "Thomson": "Discovery of electron",
+        "Rutherford": "Discovery of nucleus",
+        "Bohr": "Planetary model of atom"
+      },
+      "marks": 6,
+      "topic": "Periodic Table History",
+      "difficulty": "hard"
+    },
+    {
+        "question": "Match the following elements with their correct descriptions:",
+        "left_column": [
+          "Most electropositive element in Group 1",
+          "Noble gas",
+          "Alkali metal",
+          "Number of elements in Period 4",
+          "Shows maximum electronegativity"
+        ],
+        "right_column": [
+          "Cesium (Cs)",
+          "Radon (Rn)",
+          "Potassium (K)",
+          "18",
+          "Fluorine (F)"
+        ],
+        "correct_matches": {
+          "Most electropositive element in Group 1": "Cesium (Cs)",
+          "Noble gas": "Radon (Rn)",
+          "Alkali metal": "Potassium (K)",
+          "Number of elements in Period 4": "18",
+          "Shows maximum electronegativity": "Fluorine (F)"
+        },
+        "marks": 5,
+        "topic": "Periodic Table",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Match the following periodic properties:",
+        "left_column": [
+          "Atomic radius of K compared to Na",
+          "Atomic radius of Cl compared to S",
+          "Noble gas",
+          "Metallic character of Period 3",
+          "Atomic radius of Li compared to Na"
+        ],
+        "right_column": [
+          "Larger",
+          "Smaller",
+          "Neon (Ne)",
+          "Sodium (Na)",
+          "Smaller"
+        ],
+        "correct_matches": {
+          "Atomic radius of K compared to Na": "Larger",
+          "Atomic radius of Cl compared to S": "Smaller",
+          "Noble gas": "Neon (Ne)",
+          "Metallic character of Period 3": "Sodium (Na)",
+          "Atomic radius of Li compared to Na": "Smaller"
+        },
+        "marks": 5,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Match the following statements with the correct answers:",
+        "left_column": [
+          "Atomic radius of Li compared to Na",
+          "Atomic radius of Fluorine compared to Bromine",
+          "Number of elements in Period 3",
+          "An alkaline earth metal",
+          "Element with highest electronegativity in Group 17"
+        ],
+        "right_column": [
+          "Smaller",
+          "Larger",
+          "8",
+          "Calcium (Ca)",
+          "Fluorine (F)"
+        ],
+        "correct_matches": {
+          "Atomic radius of Li compared to Na": "Smaller",
+          "Atomic radius of Fluorine compared to Bromine": "Smaller",
+          "Number of elements in Period 3": "8",
+          "An alkaline earth metal": "Calcium (Ca)",
+          "Element with highest electronegativity in Group 17": "Fluorine (F)"
+        },
+        "marks": 5,
+        "topic": "Periodic Trends",
+        "difficulty": "medium"
+      },
+      {
+        "question": "Match the following elements with their descriptions:",
+        "left_column": [
+          "Most reactive Group 1 metal",
+          "Smallest atomic radius in Group 2",
+          "An inert gas",
+          "A radioactive element"
+        ],
+        "right_column": [
+          "Lithium (Li)",
+          "Beryllium (Be)",
+          "Krypton (Kr)",
+          "Plutonium (Pu)"
+        ],
+        "correct_matches": {
+          "Most reactive Group 1 metal": "Lithium (Li)",
+          "Smallest atomic radius in Group 2": "Beryllium (Be)",
+          "An inert gas": "Krypton (Kr)",
+          "A radioactive element": "Plutonium (Pu)"
+        },
+        "marks": 4,
+        "topic": "Periodic Table",
+        "difficulty": "hard"
+      },
+      {
+        "question": "Match the element with its classification:",
+        "left_column": [
+          "Uranium",
+          "Potassium",
+          "Beryllium",
+          "Fluorine"
+        ],
+        "right_column": [
+          "Radioactive element",
+          "Alkali metal",
+          "Alkaline earth metal",
+          "Most electronegative element"
+        ],
+        "correct_matches": {
+          "Uranium": "Radioactive element",
+          "Potassium": "Alkali metal",
+          "Beryllium": "Alkaline earth metal",
+          "Fluorine": "Most electronegative element"
+        },
+        "marks": 4,
+        "topic": "Classification of Elements",
+        "difficulty": "easy"
+      },
+      {
+        "question": "Match the element with its correct classification:",
+        "left_column": [
+          "Electropositive metal",
+          "Alkaline earth metal",
+          "Noble gas",
+          "Halogen",
+          "Radioactive element"
+        ],
+        "right_column": [
+          "Lithium (Li)",
+          "Calcium (Ca)",
+          "Neon (Ne)",
+          "Bromine (Br)",
+          "Neptunium (Np)"
+        ],
+        "correct_matches": {
+          "Electropositive metal": "Lithium (Li)",
+          "Alkaline earth metal": "Calcium (Ca)",
+          "Noble gas": "Neon (Ne)",
+          "Halogen": "Bromine (Br)",
+          "Radioactive element": "Neptunium (Np)"
+        },
+        "marks": 5,
+        "topic": "Classification of Elements",
+        "difficulty": "easy"
+      }
+  ]
