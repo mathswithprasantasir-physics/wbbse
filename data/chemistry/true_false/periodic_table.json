@@ -1,122 +1,122 @@
- [
-    {
-      "question": "The modern periodic table has 118 elements.",
-      "answer": true,
-      "marks": 1,
-      "topic": "Modern Periodic Table",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Mendeleev is known as the father of the periodic table.",
-      "answer": true,
-      "marks": 1,
-      "topic": "Periodic Table History",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Noble gases are located in Group 17 of the periodic table.",
-      "answer": false,
-      "marks": 1,
-      "topic": "Groups and Periods",
-      "difficulty": "easy"
-    },
-    {
-      "question": "There are 7 periods in the modern periodic table.",
-      "answer": true,
-      "marks": 1,
-      "topic": "Modern Periodic Table",
-      "difficulty": "easy"
-    },
-    {
-      "question": "The chemical symbol for Sodium is 'S'.",
-      "answer": false,
-      "marks": 1,
-      "topic": "Element Symbols",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Alkali metals are found in Group 1 of the periodic table.",
-      "answer": true,
-      "marks": 1,
-      "topic": "Groups and Periods",
-      "difficulty": "easy"
-    },
-    {
-      "question": "The atomic number of Carbon is 12.",
-      "answer": false,
-      "marks": 1,
-      "topic": "Atomic Numbers",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Halogens are located in Group 18 of the periodic table.",
-      "answer": false,
-      "marks": 1,
-      "topic": "Groups and Periods",
-      "difficulty": "easy"
-    },
-    {
-      "question": "The chemical symbol for Iron is 'Fe'.",
-      "answer": true,
-      "marks": 1,
-      "topic": "Element Symbols",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Period 6 contains 32 elements.",
-      "answer": true,
-      "marks": 2,
-      "topic": "Periodic Table Structure",
-      "difficulty": "hard"
-    },
+[
   {
-    "question": "Halogens belong to Group 17 of the modern periodic table.",
+    "question": "The modern periodic table has 118 elements.",
     "answer": true,
-    "marks": 2,
+    "marks": 1,
+    "topic": "Modern Periodic Table",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Mendeleev is known as the father of the periodic table.",
+    "answer": true,
+    "marks": 1,
+    "topic": "Periodic Table History",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Noble gases are located in Group 17 of the periodic table.",
+    "answer": false,
+    "marks": 1,
     "topic": "Groups and Periods",
     "difficulty": "easy"
   },
   {
-    "question": "Helium is an alkaline earth metal.",
-    "answer": false,
-    "marks": 2,
-    "topic": "Classification of Elements",
+    "question": "There are 7 periods in the modern periodic table.",
+    "answer": true,
+    "marks": 1,
+    "topic": "Modern Periodic Table",
     "difficulty": "easy"
   },
   {
-    "question": "The modern periodic table has no Group 0.",
+    "question": "The chemical symbol for Sodium is 'S'.",
+    "answer": false,
+    "marks": 1,
+    "topic": "Element Symbols",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Alkali metals are found in Group 1 of the periodic table.",
     "answer": true,
-    "marks": 2,
-    "topic": "Periodic Table Structure",
+    "marks": 1,
+    "topic": "Groups and Periods",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The atomic number of Carbon is 12.",
+    "answer": false,
+    "marks": 1,
+    "topic": "Atomic Numbers",
     "difficulty": "medium"
+  },
+  {
+    "question": "Halogens are located in Group 18 of the periodic table.",
+    "answer": false,
+    "marks": 1,
+    "topic": "Groups and Periods",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The chemical symbol for Iron is 'Fe'.",
+    "answer": true,
+    "marks": 1,
+    "topic": "Element Symbols",
+    "difficulty": "easy"
   },
   {
     "question": "Period 6 contains 32 elements.",
     "answer": true,
-    "marks": 2,
+    "marks": 1,
     "topic": "Periodic Table Structure",
     "difficulty": "hard"
   },
-  {
-    "question": "The ionization energy increases from top to bottom in a group.",
-    "answer": false,
-    "marks": 2,
-    "topic": "Periodic Trends",
-    "difficulty": "medium"
-  },
-  {
-    "question": "Lithium is an electropositive element.",
-    "answer": true,
-    "marks": 2,
-    "topic": "Periodic Trends",
-    "difficulty": "easy"
-  },
-  {
-    "question": "The sixth period of the periodic table contains transition and inner transition elements.",
-    "answer": true,
-    "marks": 2,
-    "topic": "Periodic Table Structure",
-    "difficulty": "hard"
-  }
+{
+  "question": "Halogens belong to Group 17 of the modern periodic table.",
+  "answer": true,
+  "marks": 1,
+  "topic": "Groups and Periods",
+  "difficulty": "easy"
+},
+{
+  "question": "Helium is an alkaline earth metal.",
+  "answer": false,
+  "marks": 1,
+  "topic": "Classification of Elements",
+  "difficulty": "easy"
+},
+{
+  "question": "The modern periodic table has no Group 0.",
+  "answer": true,
+  "marks": 1,
+  "topic": "Periodic Table Structure",
+  "difficulty": "medium"
+},
+{
+  "question": "Period 6 contains 32 elements.",
+  "answer": true,
+  "marks": 1,
+  "topic": "Periodic Table Structure",
+  "difficulty": "hard"
+},
+{
+  "question": "The ionization energy increases from top to bottom in a group.",
+  "answer": false,
+  "marks": 1,
+  "topic": "Periodic Trends",
+  "difficulty": "medium"
+},
+{
+  "question": "Lithium is an electropositive element.",
+  "answer": true,
+  "marks": 1,
+  "topic": "Periodic Trends",
+  "difficulty": "easy"
+},
+{
+  "question": "The sixth period of the periodic table contains transition and inner transition elements.",
+  "answer": true,
+  "marks": 1,
+  "topic": "Periodic Table Structure",
+  "difficulty": "hard"
+}
 
-  ]
+]
