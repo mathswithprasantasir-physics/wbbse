@@ -54,12 +54,21 @@ function loadQuestionTypes() {
         method: 'GET',
         success: function(data) {
             const select = $('#typeFilter');
-            // Clear existing options except first
             select.find('option:not(:first)').remove();
             
-            // Add unique types
+            // Map question types to display names
+            const typeMap = {
+                'mcqs': 'MCQs',
+                'true_false': 'True/False',
+                'fill_blanks': 'Fill in the Blanks',
+                'match_column': 'Match Column',
+                'one_mark': '1 Mark',
+                'two_mark': '2 Marks',
+                'three_mark': '3 Marks'
+            };
+            
             data.forEach(type => {
-                const label = type.replace('_', ' ').toUpperCase();
+                const label = typeMap[type] || type.replace('_', ' ').toUpperCase();
                 select.append(`<option value="${type}">${label}</option>`);
             });
         },
@@ -159,10 +168,8 @@ function renderQuestions() {
         const marksLabel = q.marks ? `${q.marks} Mark${q.marks > 1 ? 's' : ''}` : 'N/A';
         const subjectLabel = q.subject ? q.subject.charAt(0).toUpperCase() + q.subject.slice(1) : 'Unknown';
         
-        // Build question HTML
         html += `<div class="question-card" data-index="${globalIndex}">`;
         
-        // Header with badges
         html += `
             <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
                 <div>
@@ -176,7 +183,6 @@ function renderQuestions() {
             </div>
         `;
         
-        // Question text
         html += `<div class="question-text">${q.question}</div>`;
         
         // Render based on question type
@@ -186,6 +192,8 @@ function renderQuestions() {
             html += renderTrueFalse(q, globalIndex);
         } else if (q.type === 'fill_blanks') {
             html += renderFillBlanks(q, globalIndex);
+        } else if (q.type === 'match_column') {
+            html += renderMatchColumn(q, globalIndex);
         } else {
             html += renderMarkQuestion(q, globalIndex);
         }
@@ -195,12 +203,267 @@ function renderQuestions() {
     
     container.html(html);
     
-    // Re-render math if MathJax is available
     if (window.MathJax) {
         MathJax.typesetPromise();
     }
 }
 
+// ============================================
+// Match Column Render Function
+// ============================================
+function renderMatchColumn(q, index) {
+    let html = `<div class="match-column-section mt-3">`;
+    html += `<div class="row">`;
+    
+    // Left Column
+    html += `<div class="col-md-6">`;
+    html += `<h6 class="text-center"><strong>Left Column</strong></h6>`;
+    q.left_column.forEach((item, i) => {
+        html += `
+            <div class="match-item left-item" data-question="${index}" data-left="${item}">
+                <button class="btn btn-outline-primary w-100 text-start match-btn" 
+                        onclick="selectMatchItem(${index}, 'left', '${item}', ${i})">
+                    ${String.fromCharCode(65 + i)}. ${item}
+                </button>
+            </div>
+        `;
+    });
+    html += `</div>`;
+    
+    // Right Column
+    html += `<div class="col-md-6">`;
+    html += `<h6 class="text-center"><strong>Right Column</strong></h6>`;
+    // Shuffle right column for matching
+    const shuffledRight = [...q.right_column];
+    for (let i = shuffledRight.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledRight[i], shuffledRight[j]] = [shuffledRight[j], shuffledRight[i]];
+    }
+    shuffledRight.forEach((item, i) => {
+        html += `
+            <div class="match-item right-item" data-question="${index}" data-right="${item}">
+                <button class="btn btn-outline-secondary w-100 text-start match-btn" 
+                        onclick="selectMatchItem(${index}, 'right', '${item}', ${i})">
+                    ${String.fromCharCode(65 + i)}. ${item}
+                </button>
+            </div>
+        `;
+    });
+    html += `</div>`;
+    
+    html += `</div>`;
+    html += `
+        <div id="match-status-${index}" class="mt-3" style="display: none;"></div>
+        <div id="match-answer-${index}" class="answer">
+            <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Matches:</strong><br>
+            ${Object.entries(q.correct_matches).map(([left, right]) => `${left} → ${right}`).join('<br>')}
+        </div>
+        <button class="btn btn-success mt-3" onclick="checkMatchColumn(${index})">
+            <i class="bi bi-check-all"></i> Check Matches
+        </button>
+        <button class="btn btn-danger mt-3 ms-2" onclick="resetMatchColumn(${index})">
+            <i class="bi bi-arrow-counterclockwise"></i> Reset
+        </button>
+    `;
+    
+    return html + `</div>`;
+}
+
+// Match Column State
+let matchSelections = {};
+
+function selectMatchItem(index, column, value, position) {
+    if (!matchSelections[index]) {
+        matchSelections[index] = { left: null, right: null, matches: {}, leftSelected: false, rightSelected: false };
+    }
+    
+    const state = matchSelections[index];
+    const questionCard = $(`.question-card[data-index="${index}"]`);
+    const leftBtns = questionCard.find('.left-item .match-btn');
+    const rightBtns = questionCard.find('.right-item .match-btn');
+    
+    if (column === 'left') {
+        // Deselect previous left selection
+        leftBtns.removeClass('btn-primary btn-outline-primary').addClass('btn-outline-primary');
+        leftBtns.each(function() {
+            if ($(this).data('left') === state.left) {
+                $(this).removeClass('btn-primary');
+            }
+        });
+        
+        // Select new left
+        state.left = value;
+        state.leftSelected = true;
+        leftBtns.each(function() {
+            if ($(this).data('left') === value) {
+                $(this).removeClass('btn-outline-primary').addClass('btn-primary');
+            }
+        });
+        
+        // If both selected, auto-match
+        if (state.rightSelected && state.right) {
+            state.matches[state.left] = state.right;
+            state.leftSelected = false;
+            state.rightSelected = false;
+            state.left = null;
+            state.right = null;
+            
+            // Disable matched items
+            leftBtns.each(function() {
+                if ($(this).data('left') === state.left) {
+                    $(this).prop('disabled', true).removeClass('btn-primary').addClass('btn-success');
+                }
+            });
+            rightBtns.each(function() {
+                if ($(this).data('right') === state.right) {
+                    $(this).prop('disabled', true).removeClass('btn-secondary').addClass('btn-success');
+                }
+            });
+            
+            updateMatchStatus(index);
+        }
+    } else if (column === 'right') {
+        // Deselect previous right selection
+        rightBtns.removeClass('btn-secondary btn-outline-secondary').addClass('btn-outline-secondary');
+        rightBtns.each(function() {
+            if ($(this).data('right') === state.right) {
+                $(this).removeClass('btn-secondary');
+            }
+        });
+        
+        // Select new right
+        state.right = value;
+        state.rightSelected = true;
+        rightBtns.each(function() {
+            if ($(this).data('right') === value) {
+                $(this).removeClass('btn-outline-secondary').addClass('btn-secondary');
+            }
+        });
+        
+        // If both selected, auto-match
+        if (state.leftSelected && state.left) {
+            state.matches[state.left] = state.right;
+            state.leftSelected = false;
+            state.rightSelected = false;
+            const matchedLeft = state.left;
+            const matchedRight = state.right;
+            state.left = null;
+            state.right = null;
+            
+            // Disable matched items
+            leftBtns.each(function() {
+                if ($(this).data('left') === matchedLeft) {
+                    $(this).prop('disabled', true).removeClass('btn-primary').addClass('btn-success');
+                }
+            });
+            rightBtns.each(function() {
+                if ($(this).data('right') === matchedRight) {
+                    $(this).prop('disabled', true).removeClass('btn-secondary').addClass('btn-success');
+                }
+            });
+            
+            updateMatchStatus(index);
+        }
+    }
+}
+
+function updateMatchStatus(index) {
+    const state = matchSelections[index];
+    const totalMatches = Object.keys(state.matches).length;
+    const totalRequired = $('.left-item', `.question-card[data-index="${index}"]`).length;
+    
+    const statusDiv = $(`#match-status-${index}`);
+    statusDiv.show();
+    statusDiv.html(`
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> Matched: ${totalMatches}/${totalRequired}
+            ${totalMatches === totalRequired ? ' ✅ All matched!' : ''}
+        </div>
+    `);
+}
+
+function checkMatchColumn(index) {
+    const q = allQuestions[index];
+    const state = matchSelections[index];
+    const statusDiv = $(`#match-status-${index}`);
+    const answerDiv = $(`#match-answer-${index}`);
+    
+    if (!state || Object.keys(state.matches).length === 0) {
+        statusDiv.show();
+        statusDiv.html(`
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle"></i> Please match all items first!
+            </div>
+        `);
+        return;
+    }
+    
+    const totalMatches = Object.keys(state.matches).length;
+    const totalRequired = Object.keys(q.correct_matches).length;
+    
+    if (totalMatches < totalRequired) {
+        statusDiv.show();
+        statusDiv.html(`
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle"></i> Please match all ${totalRequired} items. Currently matched: ${totalMatches}
+            </div>
+        `);
+        return;
+    }
+    
+    // Check matches
+    let correctCount = 0;
+    let incorrectMatches = [];
+    
+    Object.entries(state.matches).forEach(([left, right]) => {
+        if (q.correct_matches[left] === right) {
+            correctCount++;
+        } else {
+            incorrectMatches.push(`${left} → ${right} (Correct: ${q.correct_matches[left]})`);
+        }
+    });
+    
+    statusDiv.show();
+    if (correctCount === totalRequired) {
+        statusDiv.html(`
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle-fill"></i> ✅ Perfect! All ${totalRequired} matches are correct!
+            </div>
+        `);
+        answerDiv.addClass('show');
+    } else {
+        statusDiv.html(`
+            <div class="alert alert-danger">
+                <i class="bi bi-x-circle-fill"></i> ❌ ${correctCount}/${totalRequired} correct. 
+                ${incorrectMatches.length > 0 ? '<br>Incorrect matches: ' + incorrectMatches.join('<br>') : ''}
+            </div>
+        `);
+        answerDiv.addClass('show');
+    }
+    
+    // Disable all buttons
+    $('.match-btn', `.question-card[data-index="${index}"]`).prop('disabled', true);
+}
+
+function resetMatchColumn(index) {
+    matchSelections[index] = { left: null, right: null, matches: {}, leftSelected: false, rightSelected: false };
+    
+    const questionCard = $(`.question-card[data-index="${index}"]`);
+    questionCard.find('.match-btn').prop('disabled', false);
+    questionCard.find('.left-item .match-btn')
+        .removeClass('btn-primary btn-success btn-outline-primary')
+        .addClass('btn-outline-primary');
+    questionCard.find('.right-item .match-btn')
+        .removeClass('btn-secondary btn-success btn-outline-secondary')
+        .addClass('btn-outline-secondary');
+    
+    $(`#match-status-${index}`).hide();
+    $(`#match-answer-${index}`).removeClass('show');
+}
+
+// ============================================
+// MCQ Functions
+// ============================================
 function renderMCQ(q, index) {
     const letters = ['A', 'B', 'C', 'D'];
     let html = `<div class="options mt-3">`;
@@ -228,6 +491,55 @@ function renderMCQ(q, index) {
     return html + `</div>`;
 }
 
+function checkMCQ(index, selectedOption) {
+    const q = allQuestions[index];
+    const feedbackDiv = $(`#feedback-${index}`);
+    const answerDiv = $(`#answer-${index}`);
+    const buttons = $(`.option-btn[data-question="${index}"]`);
+    
+    buttons.removeClass('btn-outline-primary btn-success btn-danger').addClass('btn-outline-primary');
+    
+    const isCorrect = selectedOption === q.answer;
+    
+    buttons.each(function() {
+        const btnText = $(this).text().trim();
+        if (btnText.startsWith(selectedOption)) {
+            $(this).removeClass('btn-outline-primary');
+            if (isCorrect) {
+                $(this).addClass('btn-success');
+            } else {
+                $(this).addClass('btn-danger');
+            }
+        }
+    });
+    
+    feedbackDiv.show();
+    if (isCorrect) {
+        feedbackDiv.html(`
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle-fill"></i> ✅ Correct! Well done!
+            </div>
+        `);
+        answerDiv.addClass('show');
+    } else {
+        const letters = ['A', 'B', 'C', 'D'];
+        const correctIndex = letters.indexOf(q.answer);
+        const correctText = q.options[correctIndex] || q.answer;
+        
+        feedbackDiv.html(`
+            <div class="alert alert-danger">
+                <i class="bi bi-x-circle-fill"></i> ❌ Incorrect. The correct answer is ${q.answer}. ${correctText}
+            </div>
+        `);
+        answerDiv.addClass('show');
+    }
+    
+    buttons.prop('disabled', true);
+}
+
+// ============================================
+// True/False Functions
+// ============================================
 function renderTrueFalse(q, index) {
     return `
         <div class="true-false-options mt-3">
@@ -247,102 +559,10 @@ function renderTrueFalse(q, index) {
     `;
 }
 
-function renderFillBlanks(q, index) {
-    return `
-        <div class="fill-blanks-section mt-3">
-            <div class="input-group">
-                <input type="text" class="form-control fb-input" id="fb-input-${index}" 
-                       placeholder="Type your answer here..." 
-                       onkeypress="if(event.key==='Enter') checkFillBlanks(${index})">
-                <button class="btn btn-primary" onclick="checkFillBlanks(${index})">
-                    <i class="bi bi-check"></i> Check
-                </button>
-            </div>
-            <div id="feedback-${index}" class="mt-2" style="display: none;"></div>
-            <div id="answer-${index}" class="answer">
-                <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}
-            </div>
-        </div>
-    `;
-}
-
-function renderMarkQuestion(q, index) {
-    return `
-        <div class="mark-question-section mt-3">
-            <button class="btn btn-info" onclick="showMarkAnswer(${index})">
-                <i class="bi bi-eye"></i> Show Answer
-            </button>
-            <div id="answer-${index}" class="answer">
-                <strong><i class="bi bi-check-circle-fill text-success"></i> Answer:</strong> ${q.answer}
-            </div>
-        </div>
-    `;
-}
-
-// ============================================
-// MCQ Check Function - FIXED
-// ============================================
-function checkMCQ(index, selectedOption) {
-    const q = allQuestions[index];
-    const feedbackDiv = $(`#feedback-${index}`);
-    const answerDiv = $(`#answer-${index}`);
-    const buttons = $(`.option-btn[data-question="${index}"]`);
-    
-    // Remove previous selections
-    buttons.removeClass('btn-outline-primary btn-success btn-danger').addClass('btn-outline-primary');
-    
-    // CRITICAL FIX: Compare selected letter with answer letter
-    const isCorrect = selectedOption === q.answer;
-    
-    // Highlight selected option
-    buttons.each(function() {
-        const btnText = $(this).text().trim();
-        if (btnText.startsWith(selectedOption)) {
-            $(this).removeClass('btn-outline-primary');
-            if (isCorrect) {
-                $(this).addClass('btn-success');
-            } else {
-                $(this).addClass('btn-danger');
-            }
-        }
-    });
-    
-    // Show feedback
-    feedbackDiv.show();
-    if (isCorrect) {
-        feedbackDiv.html(`
-            <div class="alert alert-success">
-                <i class="bi bi-check-circle-fill"></i> ✅ Correct! Well done!
-            </div>
-        `);
-        answerDiv.addClass('show');
-    } else {
-        // Find the correct option text
-        const letters = ['A', 'B', 'C', 'D'];
-        const correctIndex = letters.indexOf(q.answer);
-        const correctText = q.options[correctIndex] || q.answer;
-        
-        feedbackDiv.html(`
-            <div class="alert alert-danger">
-                <i class="bi bi-x-circle-fill"></i> ❌ Incorrect. The correct answer is ${q.answer}. ${correctText}
-            </div>
-        `);
-        answerDiv.addClass('show');
-    }
-    
-    // Disable all buttons for this question
-    buttons.prop('disabled', true);
-}
-
-// ============================================
-// True/False Check Function
-// ============================================
 function checkTrueFalse(index, selectedValue) {
     const q = allQuestions[index];
     const feedbackDiv = $(`#feedback-${index}`);
     const answerDiv = $(`#answer-${index}`);
-    
-    // Find the buttons in this question
     const questionCard = $(`#feedback-${index}`).closest('.question-card');
     const buttons = questionCard.find('.tf-btn');
     
@@ -379,8 +599,27 @@ function checkTrueFalse(index, selectedValue) {
 }
 
 // ============================================
-// Fill in the Blanks Check Function
+// Fill in the Blanks Functions
 // ============================================
+function renderFillBlanks(q, index) {
+    return `
+        <div class="fill-blanks-section mt-3">
+            <div class="input-group">
+                <input type="text" class="form-control fb-input" id="fb-input-${index}" 
+                       placeholder="Type your answer here..." 
+                       onkeypress="if(event.key==='Enter') checkFillBlanks(${index})">
+                <button class="btn btn-primary" onclick="checkFillBlanks(${index})">
+                    <i class="bi bi-check"></i> Check
+                </button>
+            </div>
+            <div id="feedback-${index}" class="mt-2" style="display: none;"></div>
+            <div id="answer-${index}" class="answer">
+                <strong><i class="bi bi-check-circle-fill text-success"></i> Correct Answer:</strong> ${q.answer}
+            </div>
+        </div>
+    `;
+}
+
 function checkFillBlanks(index) {
     const q = allQuestions[index];
     const input = $(`#fb-input-${index}`);
@@ -426,8 +665,21 @@ function checkFillBlanks(index) {
 }
 
 // ============================================
-// Mark Question - Show Answer
+// Mark Question Functions
 // ============================================
+function renderMarkQuestion(q, index) {
+    return `
+        <div class="mark-question-section mt-3">
+            <button class="btn btn-info" onclick="showMarkAnswer(${index})">
+                <i class="bi bi-eye"></i> Show Answer
+            </button>
+            <div id="answer-${index}" class="answer">
+                <strong><i class="bi bi-check-circle-fill text-success"></i> Answer:</strong> ${q.answer}
+            </div>
+        </div>
+    `;
+}
+
 function showMarkAnswer(index) {
     const answerDiv = $(`#answer-${index}`);
     answerDiv.toggleClass('show');
