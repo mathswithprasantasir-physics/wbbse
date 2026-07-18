@@ -68,5 +68,55 @@
       "marks": 2,
       "topic": "Periodic Table Structure",
       "difficulty": "hard"
-    }
+    },
+  {
+    "question": "Halogens belong to Group 17 of the modern periodic table.",
+    "answer": true,
+    "marks": 2,
+    "topic": "Groups and Periods",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Helium is an alkaline earth metal.",
+    "answer": false,
+    "marks": 2,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The modern periodic table has no Group 0.",
+    "answer": true,
+    "marks": 2,
+    "topic": "Periodic Table Structure",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Period 6 contains 32 elements.",
+    "answer": true,
+    "marks": 2,
+    "topic": "Periodic Table Structure",
+    "difficulty": "hard"
+  },
+  {
+    "question": "The ionization energy increases from top to bottom in a group.",
+    "answer": false,
+    "marks": 2,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Lithium is an electropositive element.",
+    "answer": true,
+    "marks": 2,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The sixth period of the periodic table contains transition and inner transition elements.",
+    "answer": true,
+    "marks": 2,
+    "topic": "Periodic Table Structure",
+    "difficulty": "hard"
+  }
+
   ]
