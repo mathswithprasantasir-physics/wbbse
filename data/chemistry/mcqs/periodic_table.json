@@ -1,164 +1,664 @@
-  [
-  
+[
   {
-    "question": "Who is known as the father of the periodic table?",
-    "options": ["Dmitri Mendeleev", "John Dalton", "Antoine Lavoisier", "J.J. Thomson"],
+    "question": "Which element has the smallest atomic radius?",
+    "options": ["Li", "Na", "K", "Rb"],
     "answer": "A",
     "marks": 1,
-    "topic": "Periodic Table History",
+    "topic": "Periodic Trends",
     "difficulty": "easy"
   },
   {
-    "question": "How many elements are there in the modern periodic table?",
-    "options": ["118", "108", "128", "98"],
-    "answer": "A",
+    "question": "Which of the following is an alkali metal?",
+    "options": ["Fe", "Co", "Ca", "Cr"],
+    "answer": "C",
     "marks": 1,
-    "topic": "Modern Periodic Table",
+    "topic": "Periodic Table",
     "difficulty": "easy"
   },
   {
-    "question": "Which group contains the noble gases?",
-    "options": ["Group 1", "Group 2", "Group 17", "Group 18"],
+    "question": "The chemical properties of an element mainly depend on its:",
+    "options": ["Atomic mass", "Atomic number", "Electronic configuration", "Number of neutrons"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Electronic Configuration",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the highest electronegativity?",
+    "options": ["Br", "O", "N", "F"],
     "answer": "D",
     "marks": 1,
-    "topic": "Groups and Periods",
+    "topic": "Periodic Trends",
     "difficulty": "easy"
   },
   {
-    "question": "What is the atomic number of Carbon?",
-    "options": ["6", "12", "14", "4"],
-    "answer": "A",
-    "marks": 1,
-    "topic": "Atomic Numbers",
-    "difficulty": "easy"
-  },
-  {
-    "question": "Which element has the symbol 'Na'?",
-    "options": ["Nitrogen", "Sodium", "Neon", "Nickel"],
-    "answer": "B",
-    "marks": 1,
-    "topic": "Element Symbols",
-    "difficulty": "easy"
-  },
-  {
-    "question": "How many periods are there in the modern periodic table?",
-    "options": ["7", "8", "9", "6"],
-    "answer": "A",
-    "marks": 1,
-    "topic": "Modern Periodic Table",
-    "difficulty": "easy"
-  },
-  {
-    "question": "Which of the following is the chemical symbol for Potassium?",
-    "options": ["Po", "K", "Pt", "Pb"],
-    "answer": "B",
-    "marks": 1,
-    "topic": "Element Symbols",
-    "difficulty": "easy"
-  },
-  {
-    "question": "In which period does Oxygen belong?",
-    "options": ["Period 1", "Period 2", "Period 3", "Period 4"],
-    "answer": "B",
-    "marks": 1,
-    "topic": "Groups and Periods",
-    "difficulty": "medium"
-  },
-  {
-    "question": "What is the atomic mass of Helium approximately?",
-    "options": ["1", "2", "4", "8"],
+    "question": "Which element has the highest first ionization energy?",
+    "options": ["C", "O", "N", "B"],
     "answer": "C",
     "marks": 1,
-    "topic": "Atomic Mass",
+    "topic": "Periodic Trends",
     "difficulty": "medium"
   },
   {
-    "question": "Which element is represented by the symbol 'Fe'?",
-    "options": ["Francium", "Iron", "Fermium", "Fluorine"],
+    "question": "Which pair of elements belongs to the same period?",
+    "options": ["Na, Ca", "Na, Cl", "Ca, Cl", "Cl, Br"],
     "answer": "B",
     "marks": 1,
-    "topic": "Element Symbols",
+    "topic": "Periods and Groups",
     "difficulty": "easy"
   },
   {
-    "question": "How many elements are in Period 6 of the periodic table?",
-    "options": ["18", "32", "8", "24"],
-    "answer": "B",
-    "marks": 1,
-    "topic": "Periodic Table Structure",
-    "difficulty": "hard"
-  },
-  {
-    "question": "Which group is known as the alkali metals?",
-    "options": ["Group 1", "Group 2", "Group 17", "Group 18"],
-    "answer": "A",
-    "marks": 1,
-    "topic": "Groups and Periods",
-    "difficulty": "easy"
-  },
-  {
-    "question": "What is the chemical symbol for Mercury?",
-    "options": ["Me", "Mg", "Mn", "Hg"],
+    "question": "Which element forms an oxide with the greatest ionic character?",
+    "options": ["BeO", "MgO", "CaO", "BaO"],
     "answer": "D",
     "marks": 1,
-    "topic": "Element Symbols",
+    "topic": "Chemical Bonding",
     "difficulty": "medium"
   },
   {
-    "question": "Which element has the highest atomic number in the actinide series?",
-    "options": ["Uranium", "Plutonium", "Lawrencium", "Actinium"],
-    "answer": "C",
-    "marks": 1,
-    "topic": "Actinide Series",
-    "difficulty": "hard"
-  },
-  {
-    "question": "What is the atomic number of Oxygen?",
-    "options": ["6", "8", "10", "16"],
+    "question": "Which noble gas has the electron configuration 2,8?",
+    "options": ["He", "Ne", "Ar", "Kr"],
     "answer": "B",
     "marks": 1,
-    "topic": "Atomic Numbers",
+    "topic": "Electronic Configuration",
     "difficulty": "easy"
   },
   {
-    "question": "Which group contains the halogens?",
-    "options": ["Group 16", "Group 17", "Group 18", "Group 15"],
-    "answer": "B",
+    "question": "Which element has the highest metallic character?",
+    "options": ["Cs", "Rb", "K", "Na"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The electropositive character increases in the order:",
+    "options": ["C < N < O < F", "C > N > O > F", "O < N < C < F", "F > C > O > N"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which element belongs to Group 17?",
+    "options": ["O", "S", "Cl", "N"],
+    "answer": "C",
     "marks": 1,
     "topic": "Groups and Periods",
     "difficulty": "easy"
   },
   {
-    "question": "What is the chemical symbol for Silver?",
-    "options": ["S", "Si", "Ag", "Au"],
+    "question": "Which element has the electron configuration K(2), L(8), M(2)?",
+    "options": ["Mg", "Na", "Al", "Ne"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Electronic Configuration",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following has the highest electron affinity?",
+    "options": ["Li", "Na", "K", "Rb"],
     "answer": "C",
     "marks": 1,
-    "topic": "Element Symbols",
+    "topic": "Periodic Trends",
+    "difficulty": "hard"
+  },
+  {
+    "question": "The modern periodic law is based on:",
+    "options": ["Atomic mass", "Atomic number", "Valency", "Atomic volume"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Law",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which pair consists of isotopes?",
+    "options": ["Ne, O²⁻", "Ne, O₂", "K⁺, Ne", "Ne, Cl⁻"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Atoms and Ions",
     "difficulty": "medium"
   },
   {
-    "question": "How many elements are there in Group 1 (Alkali metals)?",
-    "options": ["7", "6", "8", "5"],
+    "question": "Which of the following is not a metal?",
+    "options": ["Fe", "Cu", "P", "Bi"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the smallest ionization energy?",
+    "options": ["K", "Na", "Li", "Cs"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which element is placed in the third period and Group 13?",
+    "options": ["Al", "B", "C", "Si"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Table",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which of the following elements has the largest atomic radius?",
+    "options": ["K", "H", "Li", "Na"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The electronic configuration of an element is K(2), L(8), M(7). In which group is it placed?",
+    "options": ["Group 15", "Group 16", "Group 17", "Group 18"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Electronic Configuration",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the highest ionization energy among the following?",
+    "options": ["Li", "Na", "K", "Rb"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The atomic number of Uranium is:",
+    "options": ["105", "92", "111", "100"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Atomic Number",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which pair consists of non-metals?",
+    "options": ["Na, Mg", "B, C", "N, O", "O, S"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the maximum reducing power?",
+    "options": ["Mg", "Na", "K", "Ca"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which of the following is an inert gas?",
+    "options": ["Se", "Si", "P", "Cl"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Noble Gases",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following is an amphoteric oxide?",
+    "options": ["BeO", "MgO", "CaO", "BaO"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Oxides",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The first ionization energy generally increases:",
+    "options": [
+      "Down a group",
+      "Across a period from left to right",
+      "Randomly",
+      "Only in noble gases"
+    ],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following is not a radioactive element?",
+    "options": ["Po", "Pu", "Pm", "Pt"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Radioactivity",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The electropositive character decreases in the order:",
+    "options": [
+      "Li > Be > B > C",
+      "Be > B > C > Li",
+      "Li < Be < B < C",
+      "B < Be < C < Li"
+    ],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which element has zero electron affinity?",
+    "options": ["O", "F", "N", "Ne"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which of the following is the strongest reducing agent?",
+    "options": ["Li", "Na", "K", "Cs"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Redox Chemistry",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which of the following is the strongest oxidizing agent?",
+    "options": ["Br", "O", "N", "F"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Redox Chemistry",
+    "difficulty": "medium"
+  },
+  {
+    "question": "How many periods are present in the modern periodic table?",
+    "options": ["6", "7", "8", "9"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Table",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the largest atomic size among the following?",
+    "options": ["Mg", "Na", "K", "Cs"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element belongs to Period 4 and Group 2?",
+    "options": ["Mg", "Ca", "Sr", "Ba"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Groups and Periods",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The valency of an element mainly depends on:",
+    "options": [
+      "Number of neutrons",
+      "Number of valence electrons",
+      "Atomic mass",
+      "Number of isotopes"
+    ],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Valency",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the highest electron affinity among the halogens?",
+    "options": ["F", "Cl", "Br", "I"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "hard"
+  },
+  {
+    "question": "The atomic radius increases:",
+    "options": [
+      "Across a period",
+      "From right to left in a period",
+      "Only in noble gases",
+      "It always remains constant"
+    ],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following is a transition metal?",
+    "options": ["Al", "Ca", "Rb", "Cu"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Transition Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The atomic number of Calcium is 20. It belongs to:",
+    "options": [
+      "Period 4, Group 2",
+      "Period 3, Group 2",
+      "Period 4, Group 1",
+      "Period 3, Group 3"
+    ],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Table",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element shows the greatest metallic character?",
+    "options": ["Mg", "Na", "K", "Cs"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The valency of Group 17 elements is:",
+    "options": ["1", "2", "3", "0"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Valency",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following pairs belongs to the same group?",
+    "options": ["Li, Na", "Na, Mg", "C, N", "Cl, Ar"],
     "answer": "A",
     "marks": 1,
     "topic": "Groups and Periods",
-    "difficulty": "medium"
+    "difficulty": "easy"
   },
   {
-    "question": "What is the atomic mass of Carbon approximately?",
-    "options": ["6", "8", "12", "14"],
-    "answer": "C",
+    "question": "The most electropositive element among the following is:",
+    "options": ["Li", "Na", "K", "Cs"],
+    "answer": "D",
     "marks": 1,
-    "topic": "Atomic Mass",
-    "difficulty": "medium"
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
   },
   {
-    "question": "Which element is located in Period 3, Group 14?",
-    "options": ["Carbon", "Silicon", "Germanium", "Tin"],
+    "question": "Which element has the highest non-metallic character?",
+    "options": ["Br", "O", "N", "F"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The total number of noble gases in the modern periodic table is:",
+    "options": ["6", "7", "8", "9"],
     "answer": "B",
     "marks": 1,
-    "topic": "Periodic Table Structure",
+    "topic": "Periodic Table",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which of the following is a metalloid?",
+    "options": ["Boron", "Sodium", "Magnesium", "Chlorine"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which property generally decreases from left to right across a period?",
+    "options": [
+      "Ionization energy",
+      "Electronegativity",
+      "Atomic radius",
+      "Electron affinity"
+    ],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which element has the electron configuration 2,8,18,7?",
+    "options": ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Electronic Configuration",
     "difficulty": "hard"
+  },
+  {
+    "question": "Which element has the highest atomic number among the following?",
+    "options": ["Li", "Na", "K", "Rb"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Atomic Number",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following belongs to Group 18?",
+    "options": ["O", "Cl", "Ne", "N"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Groups and Periods",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Who proposed the Modern Periodic Law?",
+    "options": [
+      "John Dalton",
+      "Dmitri Mendeleev",
+      "Henry Moseley",
+      "J. J. Thomson"
+    ],
+    "answer": "C",
+    "marks": 1,
+    "topic": "History of Periodic Table",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which pair contains only alkali metals?",
+    "options": ["Li, K", "Mg, Ca", "Na, Mg", "Ca, K"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The element having atomic number 18 is:",
+    "options": ["Neon", "Argon", "Krypton", "Helium"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Atomic Number",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which statement is correct for elements in the same group?",
+    "options": [
+      "They have the same atomic mass.",
+      "They have the same number of valence electrons.",
+      "They have the same number of shells.",
+      "They have consecutive atomic numbers."
+    ],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Groups and Periods",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following elements has the smallest ionic radius?",
+    "options": ["Li⁺", "Na⁺", "K⁺", "Rb⁺"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Ionic Radius",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which element has the highest metallic character among the following?",
+    "options": ["Li", "Na", "K", "Rb"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the highest ionization energy among the following?",
+    "options": ["F", "Cl", "Br", "I"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which of the following elements has the smallest atomic radius?",
+    "options": ["K", "Rb", "Li", "Na"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The chemical properties of an element depend mainly on:",
+    "options": [
+      "Number of neutrons",
+      "Electronic configuration",
+      "Atomic mass",
+      "Mass number"
+    ],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Electronic Configuration",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element belongs to Group 18 of the periodic table?",
+    "options": ["Oxygen", "Nitrogen", "Argon", "Fluorine"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Groups and Periods",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element is an alkaline earth metal?",
+    "options": ["Na", "K", "Ca", "Rb"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element has the electron configuration 2,8,8?",
+    "options": ["Ne", "Ar", "Kr", "Cl"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Electronic Configuration",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following elements is not a metal?",
+    "options": ["Copper", "Silver", "Phosphorus", "Iron"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which property generally increases from left to right across a period?",
+    "options": [
+      "Atomic radius",
+      "Metallic character",
+      "Electronegativity",
+      "Atomic size"
+    ],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following contains only non-metals?",
+    "options": [
+      "Li, Na",
+      "Fe, Cu",
+      "Cl, F",
+      "Mg, Ca"
+    ],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which pair represents isoelectronic species?",
+    "options": [
+      "Na⁺ and Ne",
+      "Cl and Ar",
+      "Mg²⁺ and Na",
+      "K and Ca"
+    ],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Atoms and Ions",
+    "difficulty": "medium"
+  },
+  {
+    "question": "The number of periods in the modern periodic table is:",
+    "options": ["6", "7", "8", "18"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Table",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which of the following is a noble gas?",
+    "options": ["Cl", "Ne", "O", "S"],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Noble Gases",
+    "difficulty": "easy"
+  },
+  {
+    "question": "The atomic radius decreases across a period because:",
+    "options": [
+      "The number of shells increases.",
+      "The effective nuclear charge increases.",
+      "The atomic mass decreases.",
+      "The number of neutrons decreases."
+    ],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "hard"
+  },
+  {
+    "question": "Which element has the greatest tendency to lose an electron?",
+    "options": ["Li", "Na", "K", "Cs"],
+    "answer": "D",
+    "marks": 1,
+    "topic": "Periodic Trends",
+    "difficulty": "medium"
+  },
+  {
+    "question": "Which of the following is a metalloid?",
+    "options": ["Boron", "Magnesium", "Calcium", "Sodium"],
+    "answer": "A",
+    "marks": 1,
+    "topic": "Classification of Elements",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which statement is correct according to the Modern Periodic Law?",
+    "options": [
+      "Properties of elements are periodic functions of atomic mass.",
+      "Properties of elements are periodic functions of atomic number.",
+      "Properties depend only on valency.",
+      "Properties depend only on atomic volume."
+    ],
+    "answer": "B",
+    "marks": 1,
+    "topic": "Periodic Law",
+    "difficulty": "easy"
+  },
+  {
+    "question": "Which element belongs to Period 4 and Group 17?",
+    "options": ["Fluorine", "Chlorine", "Bromine", "Iodine"],
+    "answer": "C",
+    "marks": 1,
+    "topic": "Groups and Periods",
+    "difficulty": "medium"
   }
 ]
-
